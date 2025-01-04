@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw0j6km2c58od"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_hda8y"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_hda8y")
+
+[node name="Bullets" type="Node" parent="."]
+
+[node name="Shurikens" type="Node" parent="."]

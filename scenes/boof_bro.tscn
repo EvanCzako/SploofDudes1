@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpkrkjwggjcg4"]
+
+[ext_resource type="Script" path="res://scripts/boof_bro.gd" id="1_c5nhf"]
+[ext_resource type="Texture2D" uid="uid://bdypnt1mx733n" path="res://assets/sprites/BoofBro1/sprite_0.png" id="2_hj0g3"]
+[ext_resource type="Texture2D" uid="uid://dybnlt2c7o1fe" path="res://assets/sprites/BoofBro1/sprite_1.png" id="3_nyawa"]
+[ext_resource type="Texture2D" uid="uid://drutfujjcryv5" path="res://assets/sprites/BoofBro1/sprite_2.png" id="4_h8i6d"]
+[ext_resource type="Texture2D" uid="uid://dbxt7fjphqp0x" path="res://assets/sprites/BoofBro1/sprite_3.png" id="5_iqt2f"]
+[ext_resource type="PackedScene" uid="uid://bo7smt51v1pbx" path="res://scenes/boof_arm.tscn" id="6_sf60g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_id34s"]
+size = Vector2(9, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5enxr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hj0g3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nyawa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_h8i6d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iqt2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hj0g3")
+}],
+"loop": true,
+"name": &"run",
+"speed": 4.0
+}]
+
+[node name="BoofBro" type="CharacterBody2D"]
+z_index = 5
+script = ExtResource("1_c5nhf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -15.5)
+shape = SubResource("RectangleShape2D_id34s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_5enxr")
+animation = &"run"
+autoplay = "run"
+
+[node name="BoofArm" parent="." instance=ExtResource("6_sf60g")]
+position = Vector2(1, -16)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -60)
+zoom = Vector2(2.5, 2.5)
+limit_left = -700
+limit_bottom = 150
+position_smoothing_enabled = true

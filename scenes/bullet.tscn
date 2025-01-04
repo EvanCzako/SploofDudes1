@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpey14kvv51we"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_k3n3x"]
+[ext_resource type="Texture2D" uid="uid://cibmuakdd0k44" path="res://assets/sprites/BoofBro1/sprite_5.png" id="2_swta6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8odri"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_swta6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="Node2D"]
+z_index = 5
+script = ExtResource("1_k3n3x")
+
+[node name="BulletSprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_8odri")
+offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="BulletRaycast" type="RayCast2D" parent="BulletSprite"]
+position = Vector2(-1, 0)
+target_position = Vector2(8, 0)

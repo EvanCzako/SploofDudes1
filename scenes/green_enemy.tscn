@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://dgpndpy5u6lma"]
+
+[ext_resource type="Texture2D" uid="uid://b61smfhejocaf" path="res://assets/sprites/slime_green.png" id="1_nh6eq"]
+[ext_resource type="Script" path="res://scripts/EnemyStates/State Machine.gd" id="2_a8ok2"]
+[ext_resource type="Script" path="res://scripts/EnemyStates/enemy_idle.gd" id="3_pxd0q"]
+[ext_resource type="Script" path="res://scripts/EnemyStates/enemy_chase.gd" id="3_xwaog"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8h3s7"]
+size = Vector2(10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjqei"]
+atlas = ExtResource("1_nh6eq")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mttgo"]
+atlas = ExtResource("1_nh6eq")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uxsv"]
+atlas = ExtResource("1_nh6eq")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usrdh"]
+atlas = ExtResource("1_nh6eq")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mdf07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjqei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mttgo")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uxsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usrdh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[node name="GreenEnemy" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_8h3s7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_mdf07")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.798636
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_a8ok2")
+initial_state = NodePath("EnemyIdle")
+
+[node name="EnemyChase" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy", "enemy_animation")]
+script = ExtResource("3_xwaog")
+enemy = NodePath("../..")
+enemy_animation = NodePath("../../AnimatedSprite2D")
+
+[node name="EnemyIdle" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy", "enemy_animation")]
+script = ExtResource("3_pxd0q")
+enemy = NodePath("../..")
+enemy_animation = NodePath("../../AnimatedSprite2D")

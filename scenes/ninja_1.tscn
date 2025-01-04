@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3575872h55bb"]
+
+[ext_resource type="Texture2D" uid="uid://h7fjyri0b476" path="res://assets/sprites/Ninja1/sprite_2.png" id="1_i6yfp"]
+[ext_resource type="Texture2D" uid="uid://b44bon55vfuxc" path="res://assets/sprites/Ninja1/sprite_0.png" id="2_xscka"]
+[ext_resource type="Texture2D" uid="uid://du5lurjk64xjd" path="res://assets/sprites/Ninja1/sprite_1.png" id="3_vs6p0"]
+[ext_resource type="Script" path="res://scripts/Ninja1/ninja_state_machine.gd" id="4_rcwek"]
+[ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_chase.gd" id="5_b5m6v"]
+[ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_idle.gd" id="6_ekn0r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p68a6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_i6yfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xscka")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xscka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vs6p0")
+}],
+"loop": true,
+"name": &"chase",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xscka")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vs6p0")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4hai5"]
+size = Vector2(9, 30)
+
+[node name="Ninja1" type="CharacterBody2D"]
+z_index = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p68a6")
+animation = &"chase"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_4hai5")
+
+[node name="NinjaStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_rcwek")
+initial_state = NodePath("Ninja1Idle")
+
+[node name="Ninja1Chase" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation")]
+script = ExtResource("5_b5m6v")
+ninja = NodePath("../..")
+ninja_animation = NodePath("../../AnimatedSprite2D")
+
+[node name="Ninja1Idle" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation")]
+script = ExtResource("6_ekn0r")
+ninja = NodePath("../..")
+ninja_animation = NodePath("../../AnimatedSprite2D")
+
+[node name="NinjaShurikens" type="Node" parent="."]

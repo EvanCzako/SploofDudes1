@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dask74otm64so"]
+
+[ext_resource type="Texture2D" uid="uid://dwkjx50guneiy" path="res://assets/sprites/Ninja1/sprite_3.png" id="1_btrwh"]
+[ext_resource type="Script" path="res://scripts/Ninja1/shuriken.gd" id="1_sm010"]
+
+[node name="Shuriken" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_sm010")
+
+[node name="ShurikenSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_btrwh")
+
+[node name="ShurikenRaycast" type="RayCast2D" parent="ShurikenSprite"]
+visible = false
+
+[node name="ShurikenCollisionShape" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, -1, 0, -5, 1, -5, 1, -2, 5, 0, 5, 1, 2, 1, 0, 5, -1, 5, -1, 2, -5, 0, -5, -1)
