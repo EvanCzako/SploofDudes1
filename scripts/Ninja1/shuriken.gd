@@ -10,9 +10,9 @@ static func new_shuriken(pos, rot, ninja_dir: float, speed: float) -> Shuriken:
 	new_shurry.rotation_degrees = randf_range(0,90)
 	var init_offset
 	if(ninja_dir >= 0):
-		init_offset = Vector2(20, -2)
+		init_offset = Vector2(10, -2)
 	else:
-		init_offset = Vector2(-20, 2)
+		init_offset = Vector2(-10, 2)
 		rot = PI - rot
 	new_shurry.velocity = Vector2(1,0).rotated(-rot)*speed
 	new_shurry.global_position = pos + init_offset
@@ -25,5 +25,5 @@ static func process_shurry(shurry: Shuriken, delta: float):
 		return
 	
 	
-	shurry.velocity.y += GameManager.get_gravity() * delta
+	shurry.velocity.y += GameManager.get_gravity_scale() * delta
 	shurry.move_and_slide()

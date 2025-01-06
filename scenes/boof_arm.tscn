@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bo7smt51v1pbx"]
+[gd_scene load_steps=8 format=3 uid="uid://bo7smt51v1pbx"]
 
 [ext_resource type="Texture2D" uid="uid://kbawfcl6tmid" path="res://assets/sprites/BoofBro1/boofbreezy14.png" id="1_jlpxx"]
 [ext_resource type="Script" path="res://scripts/boof_arm.gd" id="1_w2j60"]
@@ -24,6 +24,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qsxqt"]
+size = Vector2(4, 3)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_sh63o"]
 animations = [{
 "frames": [{
@@ -43,9 +46,16 @@ script = ExtResource("1_w2j60")
 sprite_frames = SubResource("SpriteFrames_h8efs")
 animation = &"aim_right"
 
-[node name="MuzzleNode" type="Node2D" parent="AnimatedSprite2D"]
+[node name="MuzzleNode" type="Area2D" parent="AnimatedSprite2D"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/MuzzleNode"]
+position = Vector2(17, -2.5)
+shape = SubResource("RectangleShape2D_qsxqt")
 
 [node name="MuzzleLocation" type="AnimatedSprite2D" parent="AnimatedSprite2D/MuzzleNode"]
-visible = false
 sprite_frames = SubResource("SpriteFrames_sh63o")
 offset = Vector2(16, -2)
+
+[connection signal="body_entered" from="AnimatedSprite2D/MuzzleNode" to="." method="_on_muzzle_node_body_entered"]
+[connection signal="body_exited" from="AnimatedSprite2D/MuzzleNode" to="." method="_on_muzzle_node_body_exited"]

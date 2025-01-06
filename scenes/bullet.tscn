@@ -24,5 +24,5 @@ sprite_frames = SubResource("SpriteFrames_8odri")
 offset = Vector2(2.08165e-12, 2.08165e-12)
 
 [node name="BulletRaycast" type="RayCast2D" parent="BulletSprite"]
-position = Vector2(-1, 0)
-target_position = Vector2(8, 0)
+position = Vector2(-2, 0)
+target_position = Vector2(10, 0)

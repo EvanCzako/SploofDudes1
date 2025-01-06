@@ -3,6 +3,7 @@ extends Node2D
 var xDir = 1
 var yDir = 0
 var rotation_map_key = str(xDir) + "," + str(yDir)
+@onready var muzzle_node: Area2D = $AnimatedSprite2D/MuzzleNode
 
 const ARM_ROTATION_MAP = {
 	"1,0": 0,
@@ -35,3 +36,12 @@ func _process(delta):
 		xDir = 1
 	rotation_map_key = str(xDir) + "," + str(yDir)
 	
+	
+	
+
+
+func _on_muzzle_node_body_entered(body: Node2D) -> void:
+	GameManager.player_info_live["muzzle_blocked"] = true
+
+func _on_muzzle_node_body_exited(body: Node2D) -> void:
+	GameManager.player_info_live["muzzle_blocked"] = false

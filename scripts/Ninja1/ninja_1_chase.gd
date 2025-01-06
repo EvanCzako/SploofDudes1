@@ -1,12 +1,13 @@
 extends EnemyState
 class_name Ninja1Chase
 
+
 @export var ninja: CharacterBody2D
 @export var ninja_animation: AnimatedSprite2D
 @export var move_speed := 100.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var horizontal_acc = 5
-var boof_bro: CharacterBody2D
+var boof_bro: RigidBody2D
 
 var move_direction: float
 var undetect_time: float

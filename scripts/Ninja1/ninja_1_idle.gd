@@ -4,7 +4,7 @@ class_name Ninja1Idle
 @export var ninja: CharacterBody2D
 @export var move_speed := 40.0
 @export var ninja_animation: AnimatedSprite2D
-var boof_bro: CharacterBody2D
+var boof_bro: RigidBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var move_direction: float

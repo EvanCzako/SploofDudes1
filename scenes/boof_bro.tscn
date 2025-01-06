@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpkrkjwggjcg4"]
+[gd_scene load_steps=10 format=3 uid="uid://bpkrkjwggjcg4"]
 
 [ext_resource type="Script" path="res://scripts/boof_bro.gd" id="1_c5nhf"]
 [ext_resource type="Texture2D" uid="uid://bdypnt1mx733n" path="res://assets/sprites/BoofBro1/sprite_0.png" id="2_hj0g3"]
@@ -7,8 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://dbxt7fjphqp0x" path="res://assets/sprites/BoofBro1/sprite_3.png" id="5_iqt2f"]
 [ext_resource type="PackedScene" uid="uid://bo7smt51v1pbx" path="res://scenes/boof_arm.tscn" id="6_sf60g"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_id34s"]
-size = Vector2(9, 29)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xgx8c"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk4m0"]
+size = Vector2(25.6163, 19.0272)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5enxr"]
 animations = [{
@@ -38,19 +41,22 @@ animations = [{
 "speed": 4.0
 }]
 
-[node name="BoofBro" type="CharacterBody2D"]
+[node name="BoofBro" type="RigidBody2D"]
 z_index = 5
+physics_material_override = SubResource("PhysicsMaterial_xgx8c")
+lock_rotation = true
 script = ExtResource("1_c5nhf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -15.5)
-shape = SubResource("RectangleShape2D_id34s")
+position = Vector2(-0.5, -13.7004)
+scale = Vector2(0.429414, 1.44009)
+shape = SubResource("RectangleShape2D_gk4m0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_5enxr")
-animation = &"run"
-autoplay = "run"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="BoofArm" parent="." instance=ExtResource("6_sf60g")]
 position = Vector2(1, -16)
@@ -61,3 +67,11 @@ zoom = Vector2(2.5, 2.5)
 limit_left = -700
 limit_bottom = 150
 position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+
+[node name="DownRay" type="RayCast2D" parent="."]
+position = Vector2(0, -2)
+target_position = Vector2(0, 5)
+collide_with_areas = true
+
+[node name="FloorRays" type="Node" parent="."]

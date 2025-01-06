@@ -2,10 +2,13 @@ extends Node
 
 @onready var bullets: Node = $Bullets
 @onready var shurikens: Node = $Shurikens
-var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
+var GRAVITY_SCALE = 1
+@export var player_info_live: Dictionary = {
+	"muzzle_blocked": false
+}
 
-func get_gravity():
-	return GRAVITY
+func get_gravity_scale():
+	return GRAVITY_SCALE
 
 func add_new_bullet(pos: Vector2, rot: float, dir: float, speed: float = 250):
 
@@ -35,5 +38,5 @@ func process_projectiles(delta: float):
 
 
 func print_vars():
-	print(bullets)
-	print(shurikens)
+	print("===========================")
+	print(player_info_live)
