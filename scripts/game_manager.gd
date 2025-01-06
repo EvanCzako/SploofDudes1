@@ -10,8 +10,7 @@ var GRAVITY_SCALE = 1
 func get_gravity_scale():
 	return GRAVITY_SCALE
 
-func add_new_bullet(pos: Vector2, rot: float, dir: float, speed: float = 250):
-
+func add_new_bullet(pos: Vector2, rot: float, dir: float, speed: float = 300):
 	var bullet_instance := Bullet.new_bullet(
 		pos, 
 		rot,

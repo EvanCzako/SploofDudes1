@@ -70,7 +70,12 @@ position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
 [node name="DownRay" type="RayCast2D" parent="."]
-position = Vector2(0, -2)
+position = Vector2(-3, -2)
+target_position = Vector2(0, 5)
+collide_with_areas = true
+
+[node name="DownRay2" type="RayCast2D" parent="."]
+position = Vector2(2, -2)
 target_position = Vector2(0, 5)
 collide_with_areas = true
 

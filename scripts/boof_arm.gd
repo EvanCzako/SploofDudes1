@@ -35,10 +35,6 @@ func _process(delta):
 	if Input.is_action_pressed("aim_right"):
 		xDir = 1
 	rotation_map_key = str(xDir) + "," + str(yDir)
-	
-	
-	
-
 
 func _on_muzzle_node_body_entered(body: Node2D) -> void:
 	GameManager.player_info_live["muzzle_blocked"] = true

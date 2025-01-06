@@ -13,6 +13,7 @@ var muzzle_node
 var trigger_pulled = true
 var facing_dir = 1
 @onready var down_ray: RayCast2D = $DownRay
+@onready var down_ray_2: RayCast2D = $DownRay2
 
 func load_resources():
 	animated_sprite_arm = boof_arm.get_node("AnimatedSprite2D")
@@ -26,8 +27,7 @@ func _ready():
 func _physics_process(delta):
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"):
-		if down_ray.is_colliding():
-			print(down_ray.get_collider())
+		if down_ray.is_colliding() or down_ray_2.is_colliding():
 			apply_central_impulse(Vector2(0, -JUMP_IMPULSE))
 
 	var direction = Input.get_axis("left", "right")
@@ -37,12 +37,12 @@ func _physics_process(delta):
 		if !((sign(direction) == sign(linear_velocity.x)) && abs(linear_velocity.x) > MAX_SPEED):
 			apply_central_force(Vector2(direction*ACC*delta, 0))
 	else:
-		apply_central_force(Vector2(-sign(linear_velocity.x)*ACC*delta*0.5, 0))
+		var x_damping = -sign(linear_velocity.x)*delta*750*abs(linear_velocity.x)
+		apply_central_force(Vector2(x_damping, 0))
 		animated_sprite_player.play("idle")
 
 	GameManager.process_projectiles(delta)
 
-	
 	
 func aim(dir):
 	if dir >= 0:

@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpey14kvv51we"]
+[gd_scene load_steps=5 format=3 uid="uid://cpey14kvv51we"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_k3n3x"]
 [ext_resource type="Texture2D" uid="uid://cibmuakdd0k44" path="res://assets/sprites/BoofBro1/sprite_5.png" id="2_swta6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uljmf"]
+size = Vector2(8, 5)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8odri"]
 animations = [{
@@ -14,15 +17,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Bullet" type="Node2D"]
+[node name="Bullet" type="RigidBody2D"]
 z_index = 5
+collision_layer = 17
+collision_mask = 17
+mass = 0.2
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 2
 script = ExtResource("1_k3n3x")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.283
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -0.5)
+shape = SubResource("RectangleShape2D_uljmf")
+
+[node name="BulletRaycast" type="RayCast2D" parent="CollisionShape2D"]
+position = Vector2(-4, -1.5)
+target_position = Vector2(8, 0)
 
 [node name="BulletSprite" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_8odri")
 offset = Vector2(2.08165e-12, 2.08165e-12)
 
-[node name="BulletRaycast" type="RayCast2D" parent="BulletSprite"]
-position = Vector2(-2, 0)
-target_position = Vector2(10, 0)
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

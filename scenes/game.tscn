@@ -238,12 +238,24 @@ shape = SubResource("RectangleShape2D_5c70t")
 [node name="Timer" type="Timer" parent="Killzone"]
 wait_time = 2.0
 
-[node name="Crate1" parent="." instance=ExtResource("9_0we7g")]
-position = Vector2(-469, -77)
+[node name="EnvObs" type="Node" parent="."]
+
+[node name="Crate1" parent="EnvObs" instance=ExtResource("9_0we7g")]
+position = Vector2(-463, -95)
+rotation = 1.5708
+
+[node name="Crate2" parent="EnvObs" instance=ExtResource("9_0we7g")]
+position = Vector2(-18, -52)
+rotation = 1.5708
+
+[node name="Crate3" parent="EnvObs" instance=ExtResource("9_0we7g")]
+position = Vector2(462, -85)
+rotation = 1.5708
 
 [node name="MapCollisionMasks" type="Node" parent="."]
 
 [node name="Area2D" type="StaticBody2D" parent="MapCollisionMasks"]
+collision_layer = 17
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D"]
 polygon = PackedVector2Array(-559, -47, -337, -47, -337, -16, 448, -15, 449, -15, 449, -47, 687, -47, 687, 139, -559, 138)
