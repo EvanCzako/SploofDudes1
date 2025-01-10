@@ -19,13 +19,15 @@ func add_new_bullet(pos: Vector2, rot: float, dir: float, speed: float = 300):
 	)
 	bullets.add_child(bullet_instance)
 	
-func add_new_shurry(pos: Vector2, rot: float, dir: float, speed: float = 350):
+func add_new_shurry(owner: RigidBody2D, pos: Vector2, rot: float, dir: float, speed: float = 300, rot_speed: float = 30):
 	
 	var shurry_instance := Shuriken.new_shuriken(
+		owner,
 		pos, 
 		rot,
 		dir,
-		speed
+		speed,
+		rot_speed
 	)
 	shurikens.add_child(shurry_instance)	
 

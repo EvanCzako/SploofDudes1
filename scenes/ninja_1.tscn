@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3575872h55bb"]
+[gd_scene load_steps=10 format=3 uid="uid://b3575872h55bb"]
 
 [ext_resource type="Texture2D" uid="uid://h7fjyri0b476" path="res://assets/sprites/Ninja1/sprite_2.png" id="1_i6yfp"]
 [ext_resource type="Texture2D" uid="uid://b44bon55vfuxc" path="res://assets/sprites/Ninja1/sprite_0.png" id="2_xscka"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_state_machine.gd" id="4_rcwek"]
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_chase.gd" id="5_b5m6v"]
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_idle.gd" id="6_ekn0r"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_76ng5"]
+friction = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p68a6"]
 animations = [{
@@ -51,8 +54,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hai5"]
 size = Vector2(9, 30)
 
-[node name="Ninja1" type="CharacterBody2D"]
+[node name="Ninja1" type="RigidBody2D"]
 z_index = 4
+physics_material_override = SubResource("PhysicsMaterial_76ng5")
+lock_rotation = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p68a6")

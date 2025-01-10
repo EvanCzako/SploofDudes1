@@ -65,7 +65,7 @@ position = Vector2(1, -16)
 position = Vector2(0, -60)
 zoom = Vector2(2.5, 2.5)
 limit_left = -700
-limit_bottom = 150
+limit_bottom = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 

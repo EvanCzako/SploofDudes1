@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcouxcda5rppr"]
+[gd_scene load_steps=13 format=3 uid="uid://dcouxcda5rppr"]
 
 [ext_resource type="Texture2D" uid="uid://bypsy2imx1dx5" path="res://assets/sprites/world_tileset.png" id="1_7xsgy"]
 [ext_resource type="PackedScene" uid="uid://bw0j6km2c58od" path="res://scenes/game_manager.tscn" id="1_lpjx0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d2msf6g33anuh" path="res://assets/sprites/SunsetLayer1/l2_sunset11.png" id="6_vyrad"]
 [ext_resource type="Script" path="res://scripts/killzone.gd" id="7_hch2t"]
 [ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="9_0we7g"]
+[ext_resource type="PackedScene" uid="uid://b3575872h55bb" path="res://scenes/ninja_1.tscn" id="9_ghg3k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vd76n"]
 texture = ExtResource("1_7xsgy")
@@ -21,11 +22,8 @@ texture = ExtResource("1_7xsgy")
 7:0/0 = 0
 8:0/0 = 0
 9:0/0 = 0
-9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -6, 8, 0.125, -8, -1.625)
 10:0/0 = 0
-10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.125, 8, -6, 8, 0.125, -8, 0.25)
 11:0/0 = 0
-11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.125, 8, -8, 8, -1.875, -8, 0.25)
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
@@ -136,7 +134,6 @@ texture = ExtResource("1_7xsgy")
 2:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_2n4i1"]
-physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vd76n")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c70t"]
@@ -245,11 +242,19 @@ position = Vector2(-463, -95)
 rotation = 1.5708
 
 [node name="Crate2" parent="EnvObs" instance=ExtResource("9_0we7g")]
-position = Vector2(-18, -52)
+position = Vector2(-382, -93)
 rotation = 1.5708
 
 [node name="Crate3" parent="EnvObs" instance=ExtResource("9_0we7g")]
-position = Vector2(462, -85)
+position = Vector2(612, -90)
+rotation = 1.5708
+
+[node name="Crate4" parent="EnvObs" instance=ExtResource("9_0we7g")]
+position = Vector2(571, -90)
+rotation = 1.5708
+
+[node name="Crate5" parent="EnvObs" instance=ExtResource("9_0we7g")]
+position = Vector2(481, -88)
 rotation = 1.5708
 
 [node name="MapCollisionMasks" type="Node" parent="."]
@@ -259,6 +264,18 @@ collision_layer = 17
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D"]
 polygon = PackedVector2Array(-559, -47, -337, -47, -337, -16, 448, -15, 449, -15, 449, -47, 687, -47, 687, 139, -559, 138)
+
+[node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks"]
+collision_layer = 17
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2"]
+polygon = PackedVector2Array(687, -47, 722, -45, 863, -45, 880, -47, 1008, -47, 1009, -50, 1009, -79, 1055, -79, 1055, -64, 1056, -63, 1086, -63, 1087, -62, 1087, 127, 881, 128, 880, -18, 686, -18, 687, -41)
+
+[node name="Ninja1" parent="." instance=ExtResource("9_ghg3k")]
+position = Vector2(190, -109)
+
+[node name="Ninja2" parent="." instance=ExtResource("9_ghg3k")]
+position = Vector2(856, -115)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

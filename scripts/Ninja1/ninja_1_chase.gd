@@ -1,12 +1,11 @@
 extends EnemyState
 class_name Ninja1Chase
 
-
-@export var ninja: CharacterBody2D
+@export var ninja: RigidBody2D
 @export var ninja_animation: AnimatedSprite2D
-@export var move_speed := 100.0
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var horizontal_acc = 5
+@export var MAX_SPEED = 100
+const ACC = 30000.0
+
 var boof_bro: RigidBody2D
 
 var move_direction: float
@@ -34,13 +33,18 @@ func PhysicsUpdate(delta: float):
 	if distance_from_player > 200:
 		Transitioned.emit(self, "Ninja1Idle")
 	
-	if (abs(ninja.velocity.x) < move_speed) or (sign(ninja.velocity.x) != dir_to_boof_bro):
-		ninja.velocity.x += dir_to_boof_bro * horizontal_acc
-	if not ninja.is_on_floor():
-		ninja.velocity.y += gravity * delta
+	#ninja.apply_central_force(Vector2(dir_to_boof_bro*ACC*delta, 0))
+	if !((sign(dir_to_boof_bro) == sign(ninja.linear_velocity.x)) && abs(ninja.linear_velocity.x) > MAX_SPEED):
+		ninja.apply_central_force(Vector2(dir_to_boof_bro*ACC*delta, 0))
+	else:
+		pass
 
 	if shuriken_time < 0:
-		GameManager.add_new_shurry(ninja.position, PI/4, dir_to_boof_bro)
+		var shurry_rot
+		if dir_to_boof_bro >= 0:
+			shurry_rot = -PI/6
+		else:
+			shurry_rot = PI + PI/6
+		shurry_rot = shurry_rot + randf_range(-PI/12, PI/12)
+		GameManager.add_new_shurry(ninja, ninja.position, shurry_rot, dir_to_boof_bro)
 		reset_shuriken_time()
-
-	ninja.move_and_slide()
