@@ -26,6 +26,9 @@ static func process_bullet(bullet: Bullet, delta: float):
 	
 	if bullet.deactivated:
 		bullet.disappear_time -= delta
+		if bullet.disappear_time <= 2.9:
+			bullet.set_collision_layer_value(1, false)
+			bullet.set_collision_mask_value(1, false)
 		if bullet.disappear_time <= 0:
 			bullet.queue_free()
 			pass
@@ -35,7 +38,5 @@ static func process_bullet(bullet: Bullet, delta: float):
 				if body.name != "BoofBro":
 					bullet.gravity_scale = 1
 					bullet.deactivated = true
-					bullet.set_collision_layer_value(1, false)
-					bullet.set_collision_mask_value(1, false)
 
 	

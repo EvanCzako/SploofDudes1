@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://6axoaqxk5tw8"]
+
+[ext_resource type="Texture2D" uid="uid://dbq3tjwry7rmj" path="res://assets/sprites/Env/Gas cans/sprite_1.png" id="1_emhal"]
+[ext_resource type="Texture2D" uid="uid://bewerr0nn8x5t" path="res://assets/sprites/Env/Gas cans/sprite_2.png" id="2_k331f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o4ja7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_emhal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_k331f")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 5.0
+}]
+
+[node name="GasFlames" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_o4ja7")
+animation = &"fire"
+autoplay = "fire"
+frame_progress = 0.32278

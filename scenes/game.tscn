@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcouxcda5rppr"]
+[gd_scene load_steps=14 format=3 uid="uid://dcouxcda5rppr"]
 
 [ext_resource type="Texture2D" uid="uid://bypsy2imx1dx5" path="res://assets/sprites/world_tileset.png" id="1_7xsgy"]
 [ext_resource type="PackedScene" uid="uid://bw0j6km2c58od" path="res://scenes/game_manager.tscn" id="1_lpjx0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/killzone.gd" id="7_hch2t"]
 [ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="9_0we7g"]
 [ext_resource type="PackedScene" uid="uid://b3575872h55bb" path="res://scenes/ninja_1.tscn" id="9_ghg3k"]
+[ext_resource type="PackedScene" uid="uid://bsv5hesajaglo" path="res://scenes/gas_can.tscn" id="9_t75ao"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vd76n"]
 texture = ExtResource("1_7xsgy")
@@ -238,11 +239,11 @@ wait_time = 2.0
 [node name="EnvObs" type="Node" parent="."]
 
 [node name="Crate1" parent="EnvObs" instance=ExtResource("9_0we7g")]
-position = Vector2(-463, -95)
+position = Vector2(-461, -85)
 rotation = 1.5708
 
 [node name="Crate2" parent="EnvObs" instance=ExtResource("9_0we7g")]
-position = Vector2(-382, -93)
+position = Vector2(-500, -88)
 rotation = 1.5708
 
 [node name="Crate3" parent="EnvObs" instance=ExtResource("9_0we7g")]
@@ -257,18 +258,22 @@ rotation = 1.5708
 position = Vector2(481, -88)
 rotation = 1.5708
 
-[node name="MapCollisionMasks" type="Node" parent="."]
+[node name="GasCan" parent="EnvObs" instance=ExtResource("9_t75ao")]
+position = Vector2(-379, -68)
+max_contacts_reported = 3
 
-[node name="Area2D" type="StaticBody2D" parent="MapCollisionMasks"]
+[node name="MapCollisionMasks" type="Node" parent="." groups=["MapCollision"]]
+
+[node name="Area2D" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
 collision_layer = 17
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D" groups=["MapCollision"]]
 polygon = PackedVector2Array(-559, -47, -337, -47, -337, -16, 448, -15, 449, -15, 449, -47, 687, -47, 687, 139, -559, 138)
 
-[node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks"]
+[node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
 collision_layer = 17
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2" groups=["MapCollision"]]
 polygon = PackedVector2Array(687, -47, 722, -45, 863, -45, 880, -47, 1008, -47, 1009, -50, 1009, -79, 1055, -79, 1055, -64, 1056, -63, 1086, -63, 1087, -62, 1087, 127, 881, 128, 880, -18, 686, -18, 687, -41)
 
 [node name="Ninja1" parent="." instance=ExtResource("9_ghg3k")]
