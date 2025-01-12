@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3575872h55bb"]
+[gd_scene load_steps=14 format=3 uid="uid://b3575872h55bb"]
 
 [ext_resource type="Texture2D" uid="uid://h7fjyri0b476" path="res://assets/sprites/Ninja1/sprite_2.png" id="1_i6yfp"]
 [ext_resource type="Texture2D" uid="uid://b44bon55vfuxc" path="res://assets/sprites/Ninja1/sprite_0.png" id="2_xscka"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_state_machine.gd" id="4_rcwek"]
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_chase.gd" id="5_b5m6v"]
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_idle.gd" id="6_ekn0r"]
+[ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_die.gd" id="7_o0x5i"]
+[ext_resource type="Texture2D" uid="uid://dmgjgx1w804pm" path="res://assets/sprites/Env/crate_1.png" id="7_vgp6b"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_76ng5"]
 friction = 0.0
@@ -54,8 +56,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hai5"]
 size = Vector2(9, 30)
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b3eia"]
+bounce = 3.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ul0jd"]
+size = Vector2(20, 14)
+
 [node name="Ninja1" type="RigidBody2D"]
 z_index = 4
+collision_layer = 2
+collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_76ng5")
 lock_rotation = true
 
@@ -81,4 +91,36 @@ script = ExtResource("6_ekn0r")
 ninja = NodePath("../..")
 ninja_animation = NodePath("../../AnimatedSprite2D")
 
+[node name="Ninja1Die" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation")]
+script = ExtResource("7_o0x5i")
+ninja = NodePath("../..")
+ninja_animation = NodePath("../../AnimatedSprite2D")
+
 [node name="NinjaShurikens" type="Node" parent="."]
+
+[node name="BounceHead" type="RigidBody2D" parent="."]
+position = Vector2(0, 5)
+collision_layer = 64
+collision_mask = 64
+physics_material_override = SubResource("PhysicsMaterial_b3eia")
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceHead"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_ul0jd")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BounceHead/CollisionShape2D"]
+visible = false
+position = Vector2(0, 8)
+scale = Vector2(0.3125, 0.9375)
+texture = ExtResource("7_vgp6b")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, -13)
+node_a = NodePath("..")
+node_b = NodePath("../BounceHead")
+
+[connection signal="body_entered" from="BounceHead" to="NinjaStateMachine" method="_on_bounce_head_body_entered"]

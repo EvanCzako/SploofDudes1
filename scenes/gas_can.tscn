@@ -1,12 +1,169 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsv5hesajaglo"]
+[gd_scene load_steps=19 format=3 uid="uid://bsv5hesajaglo"]
 
 [ext_resource type="Script" path="res://scripts/gas_can.gd" id="1_2jrff"]
 [ext_resource type="Texture2D" uid="uid://cwdok64p82enu" path="res://assets/sprites/Env/Gas cans/sprite_0.png" id="1_kmmry"]
+[ext_resource type="Texture2D" uid="uid://durt68jjfsllt" path="res://assets/sprites/Env/Explosions/sprite_0.png" id="2_tss7p"]
+[ext_resource type="Texture2D" uid="uid://bss1x6qu2hk0b" path="res://assets/sprites/Env/Explosions/sprite_1.png" id="3_swhaf"]
 [ext_resource type="Texture2D" uid="uid://dbq3tjwry7rmj" path="res://assets/sprites/Env/Gas cans/sprite_1.png" id="3_xnit6"]
 [ext_resource type="Texture2D" uid="uid://bewerr0nn8x5t" path="res://assets/sprites/Env/Gas cans/sprite_2.png" id="4_styjx"]
+[ext_resource type="Texture2D" uid="uid://q8l1acihv5s" path="res://assets/sprites/Env/Explosions/sprite_2.png" id="4_tbwle"]
+[ext_resource type="Texture2D" uid="uid://cvko35v34i0gy" path="res://assets/sprites/Env/Explosions/sprite_3.png" id="5_lm0ec"]
+[ext_resource type="Texture2D" uid="uid://codclnwdn3di2" path="res://assets/sprites/Env/Explosions/sprite_4.png" id="6_pncal"]
+[ext_resource type="Texture2D" uid="uid://b28s8162tanag" path="res://assets/sprites/Env/Explosions/sprite_5.png" id="7_jrueb"]
+[ext_resource type="Texture2D" uid="uid://cqtgioapalch2" path="res://assets/sprites/Env/Explosions/sprite_6.png" id="8_bqh4q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5fs"]
 size = Vector2(18, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nrolf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tss7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_swhaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tbwle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lm0ec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pncal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jrueb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bqh4q")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kmmry")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_km5dl"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-16, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_d11h6"]
+resource_name = "explode"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explode"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-69, -78)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333, 0.666667, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_jph4u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-16, -32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0j1o"]
+_data = {
+"RESET": SubResource("Animation_jph4u"),
+"explode": SubResource("Animation_d11h6"),
+"idle": SubResource("Animation_km5dl")
+}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b5mql"]
 animations = [{
@@ -23,6 +180,9 @@ animations = [{
 }]
 
 [node name="GasCan" type="RigidBody2D"]
+z_index = 4
+collision_layer = 3
+collision_mask = 3
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_2jrff")
@@ -31,15 +191,24 @@ script = ExtResource("1_2jrff")
 position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_ow5fs")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-texture = ExtResource("1_kmmry")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-16, -32)
+sprite_frames = SubResource("SpriteFrames_nrolf")
+animation = &"idle"
+autoplay = "idle"
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_f0j1o")
+}
 
 [node name="GasFire" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_b5mql")
 animation = &"fire"
 autoplay = "fire"
-frame_progress = 0.56097
+frame_progress = 0.190709
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

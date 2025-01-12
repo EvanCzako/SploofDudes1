@@ -3,7 +3,7 @@ class_name Ninja1Chase
 
 @export var ninja: RigidBody2D
 @export var ninja_animation: AnimatedSprite2D
-@export var MAX_SPEED = 100
+@export var MAX_SPEED = 110
 const ACC = 30000.0
 
 var boof_bro: RigidBody2D
@@ -25,7 +25,7 @@ func Update(delta: float):
 func PhysicsUpdate(delta: float):
 	if !ninja:
 		return
-
+	
 	shuriken_time -= delta
 	var dir_to_boof_bro = sign(boof_bro.position.x - ninja.position.x)
 	var distance_from_player = ninja.position.distance_to(boof_bro.position)

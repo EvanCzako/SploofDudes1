@@ -43,6 +43,8 @@ animations = [{
 
 [node name="BoofBro" type="RigidBody2D"]
 z_index = 5
+collision_layer = 65
+collision_mask = 65
 physics_material_override = SubResource("PhysicsMaterial_xgx8c")
 lock_rotation = true
 script = ExtResource("1_c5nhf")
@@ -65,7 +67,7 @@ position = Vector2(1, -16)
 position = Vector2(0, -60)
 zoom = Vector2(2.5, 2.5)
 limit_left = -700
-limit_bottom = 0
+limit_bottom = 100
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 

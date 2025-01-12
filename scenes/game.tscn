@@ -227,6 +227,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_vyrad")
 
 [node name="Killzone" type="Area2D" parent="."]
+collision_mask = 3
 script = ExtResource("7_hch2t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
@@ -262,25 +263,30 @@ rotation = 1.5708
 position = Vector2(-379, -68)
 max_contacts_reported = 3
 
+[node name="GasCan2" parent="EnvObs" instance=ExtResource("9_t75ao")]
+position = Vector2(-345, -58)
+max_contacts_reported = 3
+
+[node name="GasCan3" parent="EnvObs" instance=ExtResource("9_t75ao")]
+position = Vector2(528, -68)
+max_contacts_reported = 3
+
 [node name="MapCollisionMasks" type="Node" parent="." groups=["MapCollision"]]
 
 [node name="Area2D" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
-collision_layer = 17
+collision_layer = 31
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D" groups=["MapCollision"]]
 polygon = PackedVector2Array(-559, -47, -337, -47, -337, -16, 448, -15, 449, -15, 449, -47, 687, -47, 687, 139, -559, 138)
 
 [node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
-collision_layer = 17
+collision_layer = 31
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2" groups=["MapCollision"]]
 polygon = PackedVector2Array(687, -47, 722, -45, 863, -45, 880, -47, 1008, -47, 1009, -50, 1009, -79, 1055, -79, 1055, -64, 1056, -63, 1086, -63, 1087, -62, 1087, 127, 881, 128, 880, -18, 686, -18, 687, -41)
 
 [node name="Ninja1" parent="." instance=ExtResource("9_ghg3k")]
-position = Vector2(190, -109)
-
-[node name="Ninja2" parent="." instance=ExtResource("9_ghg3k")]
-position = Vector2(856, -115)
+position = Vector2(169, -78)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

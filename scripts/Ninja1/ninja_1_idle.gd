@@ -4,7 +4,7 @@ class_name Ninja1Idle
 @export var ninja: RigidBody2D
 @export var move_speed := 40.0
 @export var ninja_animation: AnimatedSprite2D
-const ACC = 50000.0
+const ACC = 70000.0
 var boof_bro: RigidBody2D
 
 var move_direction: float
@@ -33,6 +33,7 @@ func Update(delta: float):
 func PhysicsUpdate(delta: float):
 	
 	if ninja:
+
 		var dir_to_boof_bro = sign(boof_bro.position.x - ninja.position.x)
 		var distance_from_player = ninja.position.distance_to(boof_bro.position)
 		if move_direction < 0:
