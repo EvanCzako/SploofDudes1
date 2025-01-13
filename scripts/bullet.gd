@@ -3,7 +3,7 @@ extends RigidBody2D
 const bullet_scene: PackedScene = preload("res://scenes/bullet.tscn")
 var speed: float
 var deactivated: bool = false
-var disappear_time: float = 3.0
+var disappear_time: float = 1.5
 
 static func new_bullet(pos, rot, player_dir: float, speed: float) -> Bullet:
 	var new_bullet: Bullet = bullet_scene.instantiate()

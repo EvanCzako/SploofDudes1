@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcouxcda5rppr"]
+[gd_scene load_steps=14 format=3 uid="uid://dcouxcda5rppr"]
 
 [ext_resource type="Texture2D" uid="uid://bypsy2imx1dx5" path="res://assets/sprites/world_tileset.png" id="1_7xsgy"]
-[ext_resource type="PackedScene" uid="uid://bw0j6km2c58od" path="res://scenes/game_manager.tscn" id="1_lpjx0"]
 [ext_resource type="Texture2D" uid="uid://yywmq8y6r0w6" path="res://assets/sprites/BoofBro1/heart.png" id="2_ihqr0"]
 [ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_r814i"]
 [ext_resource type="Texture2D" uid="uid://bnftsne4vug5k" path="res://assets/sprites/SunsetLayer1/l0_sunset11.png" id="4_5mrcs"]
@@ -142,8 +141,6 @@ sources/0 = SubResource("TileSetAtlasSource_vd76n")
 size = Vector2(4559, 264)
 
 [node name="Level1" type="Node2D"]
-
-[node name="GameManager" parent="." instance=ExtResource("1_lpjx0")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -305,10 +302,13 @@ collision_mask = 0
 polygon = PackedVector2Array(687, -47, 722, -45, 863, -45, 880, -47, 1008, -47, 1009, -50, 1009, -79, 1055, -79, 1055, -64, 1056, -63, 1086, -63, 1087, -62, 1087, 127, 881, 128, 880, -18, 686, -18, 687, -41)
 
 [node name="Ninja1" parent="." instance=ExtResource("9_ghg3k")]
-position = Vector2(320, -46)
+position = Vector2(245, -62)
 
 [node name="Ninja2" parent="." instance=ExtResource("9_ghg3k")]
-position = Vector2(877, -81)
+position = Vector2(877, -101)
+
+[node name="Ninja3" parent="." instance=ExtResource("9_ghg3k")]
+position = Vector2(376, -78)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

@@ -24,6 +24,7 @@ func load_resources():
 func _ready():
 	load_resources()
 	gravity_scale = GameManager.get_gravity_scale()
+	GameManager.set_boofbro(self)
 
 func _process(delta: float) -> void:
 	if GameManager.player_info_live.health < 0:
@@ -45,8 +46,6 @@ func _physics_process(delta):
 		var x_damping = -sign(linear_velocity.x)*delta*750*abs(linear_velocity.x)
 		apply_central_force(Vector2(x_damping, 0))
 		animated_sprite_player.play("idle")
-
-	GameManager.process_projectiles(delta)
 
 	
 func aim(dir):
@@ -76,7 +75,5 @@ func _input(event):
 
 
 func _on_body_entered(body: Node) -> void:
-	pass
-	#print("YO")
-	#if "projectiles" in body.get_groups():
-		#print("Hi")
+	if "projectiles" in body.get_groups():
+		GameManager.decrement_boofbro_health(1)

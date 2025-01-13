@@ -6,7 +6,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nnu8k"]
 friction = 0.33
 
-[node name="Shuriken" type="RigidBody2D"]
+[node name="Shuriken" type="RigidBody2D" groups=["projectiles"]]
 collision_mask = 129
 physics_material_override = SubResource("PhysicsMaterial_nnu8k")
 gravity_scale = 0.5
