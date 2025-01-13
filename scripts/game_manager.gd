@@ -74,7 +74,7 @@ func process_game_logic(delta: float):
 
 func decrement_boofbro_health(amount: float):
 	player_info_live["health"] -= amount
-	if player_info_live.health < 0:
+	if player_info_live.health <= 0:
 		Engine.time_scale = 0.5
 		BOOFBRO.set_collision_mask_value(1, false)
 		BOOFBRO.set_collision_mask_value(3, false)

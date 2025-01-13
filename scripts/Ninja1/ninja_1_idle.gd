@@ -24,7 +24,7 @@ func Enter():
 	randomize_wander()
 	
 func Exit():
-	print("Exit idle called")
+	pass
 	
 func Update(delta: float):
 	if wander_time > 0:

@@ -27,6 +27,8 @@ func _ready():
 	GameManager.set_boofbro(self)
 
 func _process(delta: float) -> void:
+	if heal_cooldown >= 0:
+		heal_cooldown -= delta
 	if GameManager.player_info_live.health < 0:
 		set_collision_mask_value(1,false)
 
@@ -75,5 +77,6 @@ func _input(event):
 
 
 func _on_body_entered(body: Node) -> void:
-	if "projectiles" in body.get_groups():
+	if "projectiles" in body.get_groups() && heal_cooldown < 0:
+		heal_cooldown = 0.5
 		GameManager.decrement_boofbro_health(1)

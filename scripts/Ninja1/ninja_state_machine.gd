@@ -18,6 +18,7 @@ var dead = false
 var can_see_boofbro: bool = false
 var chase_cooldown: float = 2.5
 var move_direction: float = 0.0
+var sight_distance: float = 200
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -77,7 +78,7 @@ func process_game_logic(delta):
 	if current_state == ninja_1_idle and can_see_boofbro:
 		var ninja_rayvec = ninja_forward_raycast.target_position - ninja_forward_raycast.position
 		var boof_rayvec = boofbro_raycast.target_position - boofbro_raycast.position
-		if boof_rayvec.dot(ninja_rayvec) > 0 && boof_rayvec.length() < 200:
+		if boof_rayvec.dot(ninja_rayvec) > 0 && boof_rayvec.length() < sight_distance:
 			current_state.Exit()
 			ninja_1_chase.Enter()
 			current_state = ninja_1_chase

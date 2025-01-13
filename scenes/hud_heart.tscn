@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://4qahpbk1e04"]
+
+[ext_resource type="Texture2D" uid="uid://yywmq8y6r0w6" path="res://assets/sprites/BoofBro1/heart.png" id="1_74jcp"]
+
+[node name="Heart1" type="Sprite2D"]
+position = Vector2(42, 37)
+texture = ExtResource("1_74jcp")

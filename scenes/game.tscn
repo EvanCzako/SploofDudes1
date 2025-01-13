@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dcouxcda5rppr"]
 
 [ext_resource type="Texture2D" uid="uid://bypsy2imx1dx5" path="res://assets/sprites/world_tileset.png" id="1_7xsgy"]
-[ext_resource type="Texture2D" uid="uid://yywmq8y6r0w6" path="res://assets/sprites/BoofBro1/heart.png" id="2_ihqr0"]
+[ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_vq6kk"]
 [ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_r814i"]
 [ext_resource type="Texture2D" uid="uid://bnftsne4vug5k" path="res://assets/sprites/SunsetLayer1/l0_sunset11.png" id="4_5mrcs"]
 [ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="5_bxul3"]
@@ -142,21 +142,7 @@ size = Vector2(4559, 264)
 
 [node name="Level1" type="Node2D"]
 
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="Hearts" type="Node" parent="HUD"]
-
-[node name="Heart1" type="Sprite2D" parent="HUD/Hearts"]
-position = Vector2(42, 37)
-texture = ExtResource("2_ihqr0")
-
-[node name="Heart2" type="Sprite2D" parent="HUD/Hearts"]
-position = Vector2(83, 36)
-texture = ExtResource("2_ihqr0")
-
-[node name="Heart3" type="Sprite2D" parent="HUD/Hearts"]
-position = Vector2(125, 35)
-texture = ExtResource("2_ihqr0")
+[node name="HUD" parent="." instance=ExtResource("1_vq6kk")]
 
 [node name="WorldTileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_2n4i1")
