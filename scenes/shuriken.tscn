@@ -7,8 +7,7 @@
 friction = 0.33
 
 [node name="Shuriken" type="RigidBody2D"]
-collision_layer = 17
-collision_mask = 17
+collision_mask = 129
 physics_material_override = SubResource("PhysicsMaterial_nnu8k")
 gravity_scale = 0.5
 inertia = 1.0

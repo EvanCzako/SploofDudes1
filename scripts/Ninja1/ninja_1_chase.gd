@@ -6,7 +6,7 @@ class_name Ninja1Chase
 @export var MAX_SPEED = 110
 @export var boofbro_raycast: RayCast2D
 
-const ACC = 30000.0
+var ACC = randf_range(25000, 35000)
 
 var boof_bro: RigidBody2D
 

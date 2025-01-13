@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcouxcda5rppr"]
+[gd_scene load_steps=15 format=3 uid="uid://dcouxcda5rppr"]
 
 [ext_resource type="Texture2D" uid="uid://bypsy2imx1dx5" path="res://assets/sprites/world_tileset.png" id="1_7xsgy"]
 [ext_resource type="PackedScene" uid="uid://bw0j6km2c58od" path="res://scenes/game_manager.tscn" id="1_lpjx0"]
+[ext_resource type="Texture2D" uid="uid://yywmq8y6r0w6" path="res://assets/sprites/BoofBro1/heart.png" id="2_ihqr0"]
 [ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_r814i"]
 [ext_resource type="Texture2D" uid="uid://bnftsne4vug5k" path="res://assets/sprites/SunsetLayer1/l0_sunset11.png" id="4_5mrcs"]
 [ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="5_bxul3"]
@@ -144,6 +145,22 @@ size = Vector2(4559, 264)
 
 [node name="GameManager" parent="." instance=ExtResource("1_lpjx0")]
 
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Hearts" type="Node" parent="HUD"]
+
+[node name="Heart1" type="Sprite2D" parent="HUD/Hearts"]
+position = Vector2(42, 37)
+texture = ExtResource("2_ihqr0")
+
+[node name="Heart2" type="Sprite2D" parent="HUD/Hearts"]
+position = Vector2(83, 36)
+texture = ExtResource("2_ihqr0")
+
+[node name="Heart3" type="Sprite2D" parent="HUD/Hearts"]
+position = Vector2(125, 35)
+texture = ExtResource("2_ihqr0")
+
 [node name="WorldTileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_2n4i1")
 format = 2
@@ -154,7 +171,6 @@ unique_name_in_owner = true
 position = Vector2(-176, -164)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 2
@@ -275,19 +291,24 @@ max_contacts_reported = 3
 [node name="MapCollisionMasks" type="Node" parent="." groups=["MapCollision"]]
 
 [node name="Area2D" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
-collision_layer = 31
+collision_layer = 255
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D" groups=["MapCollision"]]
 polygon = PackedVector2Array(-559, -47, -337, -47, -337, -16, 448, -15, 449, -15, 449, -47, 687, -47, 687, 139, -559, 138)
 
 [node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
-collision_layer = 31
+collision_layer = 255
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2" groups=["MapCollision"]]
 polygon = PackedVector2Array(687, -47, 722, -45, 863, -45, 880, -47, 1008, -47, 1009, -50, 1009, -79, 1055, -79, 1055, -64, 1056, -63, 1086, -63, 1087, -62, 1087, 127, 881, 128, 880, -18, 686, -18, 687, -41)
 
 [node name="Ninja1" parent="." instance=ExtResource("9_ghg3k")]
-position = Vector2(169, -78)
+position = Vector2(320, -46)
+
+[node name="Ninja2" parent="." instance=ExtResource("9_ghg3k")]
+position = Vector2(877, -81)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

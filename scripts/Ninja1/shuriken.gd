@@ -40,5 +40,3 @@ static func process_shurry(shurry: Shuriken, delta: float):
 					shurry.deactivated = true
 					shurry.set_collision_layer_value(1, false)
 					shurry.set_collision_mask_value(1, false)
-
-	

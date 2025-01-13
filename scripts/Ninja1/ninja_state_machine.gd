@@ -77,7 +77,7 @@ func process_game_logic(delta):
 	if current_state == ninja_1_idle and can_see_boofbro:
 		var ninja_rayvec = ninja_forward_raycast.target_position - ninja_forward_raycast.position
 		var boof_rayvec = boofbro_raycast.target_position - boofbro_raycast.position
-		if boof_rayvec.dot(ninja_rayvec) > 0:
+		if boof_rayvec.dot(ninja_rayvec) > 0 && boof_rayvec.length() < 200:
 			current_state.Exit()
 			ninja_1_chase.Enter()
 			current_state = ninja_1_chase
@@ -99,4 +99,8 @@ func _on_bounce_head_body_entered(body: Node) -> void:
 
 func _on_ninja_1_body_entered(body: Node) -> void:
 	if "projectiles" in body.get_groups():
+		if current_state != ninja_1_chase:
+			current_state.Exit()
+			ninja_1_chase.Enter()
+			current_state = ninja_1_chase
 		health -= 0.5

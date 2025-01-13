@@ -131,8 +131,8 @@ ninja_animation = NodePath("../../AnimatedSprite2D")
 
 [node name="BounceHead" type="RigidBody2D" parent="."]
 position = Vector2(0, 5)
-collision_layer = 64
-collision_mask = 64
+collision_layer = 4
+collision_mask = 4
 physics_material_override = SubResource("PhysicsMaterial_b3eia")
 lock_rotation = true
 contact_monitor = true
@@ -161,7 +161,7 @@ target_position = Vector2(-24, 0)
 [node name="BoofBroRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, 1)
 target_position = Vector2(100, 0)
-collision_mask = 15
+collision_mask = 13
 
 [node name="sprite" type="Sprite2D" parent="BoofBroRaycast"]
 visible = false

@@ -4,7 +4,8 @@ extends Node
 @onready var shurikens: Node = $Shurikens
 var GRAVITY_SCALE = 1
 @export var player_info_live: Dictionary = {
-	"muzzle_blocked": false
+	"muzzle_blocked": false,
+	"health": 3
 }
 
 func get_gravity_scale():

@@ -12,6 +12,7 @@ var muzzle_location
 var muzzle_node
 var trigger_pulled = true
 var facing_dir = 1
+var heal_cooldown = 0.5
 @onready var down_ray: RayCast2D = $DownRay
 @onready var down_ray_2: RayCast2D = $DownRay2
 
@@ -23,6 +24,10 @@ func load_resources():
 func _ready():
 	load_resources()
 	gravity_scale = GameManager.get_gravity_scale()
+
+func _process(delta: float) -> void:
+	if GameManager.player_info_live.health < 0:
+		set_collision_mask_value(1,false)
 
 func _physics_process(delta):
 	# Handle jump.
@@ -68,3 +73,10 @@ func _input(event):
 		trigger_pulled = true
 	if event.is_action_released("fire_1"):
 		trigger_pulled = false
+
+
+func _on_body_entered(body: Node) -> void:
+	pass
+	#print("YO")
+	#if "projectiles" in body.get_groups():
+		#print("Hi")
