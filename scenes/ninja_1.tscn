@@ -1,13 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3575872h55bb"]
+[gd_scene load_steps=17 format=3 uid="uid://b3575872h55bb"]
 
 [ext_resource type="Texture2D" uid="uid://h7fjyri0b476" path="res://assets/sprites/Ninja1/sprite_2.png" id="1_i6yfp"]
 [ext_resource type="Texture2D" uid="uid://b44bon55vfuxc" path="res://assets/sprites/Ninja1/sprite_0.png" id="2_xscka"]
 [ext_resource type="Texture2D" uid="uid://du5lurjk64xjd" path="res://assets/sprites/Ninja1/sprite_1.png" id="3_vs6p0"]
+[ext_resource type="Texture2D" uid="uid://bid1sdhq5eoay" path="res://assets/sprites/Ninja1/sprite_4.png" id="4_a4edf"]
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_state_machine.gd" id="4_rcwek"]
+[ext_resource type="Texture2D" uid="uid://depshp6as3guq" path="res://assets/sprites/Ninja1/sprite_5.png" id="5_3kl5l"]
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_chase.gd" id="5_b5m6v"]
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_idle.gd" id="6_ekn0r"]
 [ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_die.gd" id="7_o0x5i"]
 [ext_resource type="Texture2D" uid="uid://dmgjgx1w804pm" path="res://assets/sprites/Env/crate_1.png" id="7_vgp6b"]
+[ext_resource type="Script" path="res://scripts/Ninja1/ninja_1_stunned.gd" id="10_a30c6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_76ng5"]
 friction = 0.0
@@ -51,6 +54,23 @@ animations = [{
 "loop": true,
 "name": &"jump",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_a4edf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3kl5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a4edf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3kl5l")
+}],
+"loop": true,
+"name": &"stunned",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hai5"]
@@ -60,7 +80,7 @@ size = Vector2(9, 30)
 bounce = 3.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ul0jd"]
-size = Vector2(20, 14)
+size = Vector2(16, 14)
 
 [node name="Ninja1" type="RigidBody2D"]
 z_index = 4
@@ -68,10 +88,13 @@ collision_layer = 2
 collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_76ng5")
 lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p68a6")
-animation = &"idle"
+animation = &"chase"
+frame_progress = 0.57993
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 1)
@@ -81,18 +104,26 @@ shape = SubResource("RectangleShape2D_4hai5")
 script = ExtResource("4_rcwek")
 initial_state = NodePath("Ninja1Idle")
 
-[node name="Ninja1Chase" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation")]
+[node name="Ninja1Chase" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation", "boofbro_raycast")]
 script = ExtResource("5_b5m6v")
 ninja = NodePath("../..")
 ninja_animation = NodePath("../../AnimatedSprite2D")
+boofbro_raycast = NodePath("../../BoofBroRaycast")
 
-[node name="Ninja1Idle" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation")]
+[node name="Ninja1Idle" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation", "boofbro_raycast", "ninja_raycast")]
 script = ExtResource("6_ekn0r")
 ninja = NodePath("../..")
 ninja_animation = NodePath("../../AnimatedSprite2D")
+boofbro_raycast = NodePath("../../BoofBroRaycast")
+ninja_raycast = NodePath("../../NinjaForwardRaycast")
 
 [node name="Ninja1Die" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation")]
 script = ExtResource("7_o0x5i")
+ninja = NodePath("../..")
+ninja_animation = NodePath("../../AnimatedSprite2D")
+
+[node name="Ninja1Stunned" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation")]
+script = ExtResource("10_a30c6")
 ninja = NodePath("../..")
 ninja_animation = NodePath("../../AnimatedSprite2D")
 
@@ -123,4 +154,21 @@ position = Vector2(0, -13)
 node_a = NodePath("..")
 node_b = NodePath("../BounceHead")
 
+[node name="NinjaForwardRaycast" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(-24, 0)
+
+[node name="BoofBroRaycast" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(100, 0)
+collision_mask = 15
+
+[node name="sprite" type="Sprite2D" parent="BoofBroRaycast"]
+visible = false
+position = Vector2(1.90735e-06, 0)
+scale = Vector2(3.0625, 1)
+texture = ExtResource("7_vgp6b")
+
+[connection signal="body_entered" from="." to="NinjaStateMachine" method="_on_ninja_1_body_entered"]
+[connection signal="body_shape_entered" from="." to="NinjaStateMachine" method="_on_ninja_1_body_shape_entered"]
 [connection signal="body_entered" from="BounceHead" to="NinjaStateMachine" method="_on_bounce_head_body_entered"]
