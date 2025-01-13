@@ -2,7 +2,7 @@ extends Node
 
 var BOOFBRO: RigidBody2D
 @onready var bullets: Node = $Bullets
-@onready var shurikens: Node = $Shurikens
+@onready var shurikens: Node = $Shuriken
 @export var GRAVITY_SCALE = 1
 @export var player_info_live: Dictionary
 
@@ -12,14 +12,13 @@ func reset_inits():
 	shurikens = $Shurikens
 	player_info_live = {
 		"muzzle_blocked": false,
-		"health": 3,
+		"health": 6,
 		"dying": false,
 		"death_counter": 1.5
 	}
 	
 func _ready() -> void:
 	reset_inits()
-	
 
 func set_boofbro(bro: RigidBody2D):
 	BOOFBRO = bro
@@ -79,6 +78,12 @@ func decrement_boofbro_health(amount: float):
 		BOOFBRO.set_collision_mask_value(1, false)
 		BOOFBRO.set_collision_mask_value(3, false)
 		player_info_live["dying"] = true
+
+func hurt_ninja(ninja: RigidBody2D, amount: float) -> void:
+	if !ninja:
+		return
+
+	ninja.get_node("NinjaStateMachine").hurt_ninja_func(5)
 
 func print_vars():
 	print("===========================")

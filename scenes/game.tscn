@@ -240,11 +240,11 @@ wait_time = 2.0
 [node name="EnvObs" type="Node" parent="."]
 
 [node name="Crate1" parent="EnvObs" instance=ExtResource("9_0we7g")]
-position = Vector2(-461, -85)
+position = Vector2(-507, -83)
 rotation = 1.5708
 
 [node name="Crate2" parent="EnvObs" instance=ExtResource("9_0we7g")]
-position = Vector2(-500, -88)
+position = Vector2(-533, -86)
 rotation = 1.5708
 
 [node name="Crate3" parent="EnvObs" instance=ExtResource("9_0we7g")]
@@ -260,11 +260,19 @@ position = Vector2(481, -88)
 rotation = 1.5708
 
 [node name="GasCan" parent="EnvObs" instance=ExtResource("9_t75ao")]
-position = Vector2(-379, -68)
+position = Vector2(-406, -58)
 max_contacts_reported = 3
 
 [node name="GasCan2" parent="EnvObs" instance=ExtResource("9_t75ao")]
-position = Vector2(-345, -58)
+position = Vector2(-365, -57)
+max_contacts_reported = 3
+
+[node name="GasCan4" parent="EnvObs" instance=ExtResource("9_t75ao")]
+position = Vector2(124, -32)
+max_contacts_reported = 3
+
+[node name="GasCan5" parent="EnvObs" instance=ExtResource("9_t75ao")]
+position = Vector2(96, -31)
 max_contacts_reported = 3
 
 [node name="GasCan3" parent="EnvObs" instance=ExtResource("9_t75ao")]
@@ -287,13 +295,15 @@ collision_mask = 0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2" groups=["MapCollision"]]
 polygon = PackedVector2Array(687, -47, 722, -45, 863, -45, 880, -47, 1008, -47, 1009, -50, 1009, -79, 1055, -79, 1055, -64, 1056, -63, 1086, -63, 1087, -62, 1087, 127, 881, 128, 880, -18, 686, -18, 687, -41)
 
-[node name="Ninja1" parent="." instance=ExtResource("9_ghg3k")]
+[node name="Ninjas" type="Node" parent="."]
+
+[node name="Ninja1" parent="Ninjas" instance=ExtResource("9_ghg3k")]
 position = Vector2(245, -62)
 
-[node name="Ninja2" parent="." instance=ExtResource("9_ghg3k")]
+[node name="Ninja2" parent="Ninjas" instance=ExtResource("9_ghg3k")]
 position = Vector2(877, -101)
 
-[node name="Ninja3" parent="." instance=ExtResource("9_ghg3k")]
+[node name="Ninja3" parent="Ninjas" instance=ExtResource("9_ghg3k")]
 position = Vector2(376, -78)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]

@@ -3,14 +3,14 @@ extends RigidBody2D
 var is_punctured: bool = false
 var time_to_boom: float = randf_range(1,2)
 var explosion_time: float = 0.9
-var explosion_impulse: float = 700
+var explosion_impulse: float = 600
 var boomed_bodies: Array = []
 var puncture_force: float = 500
 @onready var gas_fire: AnimatedSprite2D = $GasFire
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var explode_circle: Area2D = $ExplodeCircle
-
+@onready var gas_can_raycast: RayCast2D = $GasCanRaycast
 
 func _ready():
 	gravity_scale = GameManager.get_gravity_scale()
@@ -45,8 +45,24 @@ func handle_puncture(puncture_pos):
 
 func handle_explode(delta: float):
 	for body in explode_circle.get_overlapping_bodies():
-		if !(body in boomed_bodies):
-			if body.name == "BoofBro" or "enemies" in body.get_groups():
+		if !(body in boomed_bodies) and body != self:
+			if body.name == "BoofBro":
+				var boom_impulse = (body.global_position-global_position).normalized() * explosion_impulse
+				body.apply_central_impulse(boom_impulse)
+				boomed_bodies.append(body)
+				GameManager.decrement_boofbro_health(2)
+			elif "explodables" in body.get_groups():
+				gas_can_raycast.target_position = (body.global_position - global_position).rotated(-rotation)
+				if gas_can_raycast.is_colliding() and (gas_can_raycast.get_collider() == body):
+					var new_puncture_pos = gas_can_raycast.get_collision_point()
+					body.handle_puncture(new_puncture_pos)
+					boomed_bodies.append(body)
+			elif "enemies" in body.get_groups():
+				var boom_impulse = (body.global_position-global_position).normalized() * explosion_impulse
+				body.apply_central_impulse(boom_impulse)
+				boomed_bodies.append(body)
+				GameManager.hurt_ninja(body, 5)
+			elif "environment" in body.get_groups():
 				var boom_impulse = (body.global_position-global_position).normalized() * explosion_impulse
 				body.apply_central_impulse(boom_impulse)
 				boomed_bodies.append(body)

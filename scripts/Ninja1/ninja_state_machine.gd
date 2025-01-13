@@ -23,7 +23,6 @@ var sight_distance: float = 200
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	boofbro = get_tree().get_first_node_in_group("Player")
-
 	for child in get_children():
 		if child is EnemyState:
 			states[child.name.to_lower()] = child
@@ -31,6 +30,7 @@ func _ready():
 	if initial_state:
 		initial_state.Enter()
 		current_state = initial_state
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -105,3 +105,9 @@ func _on_ninja_1_body_entered(body: Node) -> void:
 			ninja_1_chase.Enter()
 			current_state = ninja_1_chase
 		health -= 0.5
+
+func hurt_ninja_func(amount: float) -> void:
+	health -= amount
+	current_state.Exit()
+	ninja_1_stunned.Enter()
+	current_state = ninja_1_stunned

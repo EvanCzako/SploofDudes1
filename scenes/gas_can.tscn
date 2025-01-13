@@ -182,9 +182,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_qeeag"]
 radius = 59.0339
 
-[node name="GasCan" type="RigidBody2D"]
+[node name="GasCan" type="RigidBody2D" groups=["environment", "explodables"]]
 z_index = 4
-collision_layer = 3
+collision_layer = 259
 collision_mask = 3
 contact_monitor = true
 max_contacts_reported = 10
@@ -216,12 +216,15 @@ frame_progress = 0.190709
 flip_h = true
 
 [node name="ExplodeCircle" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplodeCircle"]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_qeeag")
+
+[node name="GasCanRaycast" type="RayCast2D" parent="."]
+position = Vector2(0, -14)
+collision_mask = 256
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
