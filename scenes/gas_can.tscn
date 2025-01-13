@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bsv5hesajaglo"]
+[gd_scene load_steps=20 format=3 uid="uid://bsv5hesajaglo"]
 
 [ext_resource type="Script" path="res://scripts/gas_can.gd" id="1_2jrff"]
 [ext_resource type="Texture2D" uid="uid://cwdok64p82enu" path="res://assets/sprites/Env/Gas cans/sprite_0.png" id="1_kmmry"]
@@ -179,6 +179,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qeeag"]
+radius = 59.0339
+
 [node name="GasCan" type="RigidBody2D"]
 z_index = 4
 collision_layer = 3
@@ -210,5 +213,15 @@ sprite_frames = SubResource("SpriteFrames_b5mql")
 animation = &"fire"
 autoplay = "fire"
 frame_progress = 0.190709
+flip_h = true
+
+[node name="ExplodeCircle" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplodeCircle"]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_qeeag")
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

@@ -82,7 +82,7 @@ bounce = 3.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ul0jd"]
 size = Vector2(16, 14)
 
-[node name="Ninja1" type="RigidBody2D"]
+[node name="Ninja1" type="RigidBody2D" groups=["enemies"]]
 z_index = 4
 collision_layer = 2
 collision_mask = 2
