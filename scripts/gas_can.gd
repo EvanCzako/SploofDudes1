@@ -55,7 +55,9 @@ func handle_explode(delta: float):
 				gas_can_raycast.target_position = (body.global_position - global_position).rotated(-rotation)
 				if gas_can_raycast.is_colliding() and (gas_can_raycast.get_collider() == body):
 					var new_puncture_pos = gas_can_raycast.get_collision_point()
+					var boom_impulse = (body.global_position-global_position).normalized() * explosion_impulse
 					body.handle_puncture(new_puncture_pos)
+					body.apply_central_impulse(boom_impulse)
 					boomed_bodies.append(body)
 			elif "enemies" in body.get_groups():
 				var boom_impulse = (body.global_position-global_position).normalized() * explosion_impulse

@@ -93,10 +93,9 @@ max_contacts_reported = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p68a6")
-animation = &"chase"
-frame_progress = 0.57993
+animation = &"jump"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="NinjaCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_4hai5")
 
@@ -104,10 +103,11 @@ shape = SubResource("RectangleShape2D_4hai5")
 script = ExtResource("4_rcwek")
 initial_state = NodePath("Ninja1Idle")
 
-[node name="Ninja1Chase" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation", "boofbro_raycast")]
+[node name="Ninja1Chase" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation", "ninja_forward_raycast", "boofbro_raycast")]
 script = ExtResource("5_b5m6v")
 ninja = NodePath("../..")
 ninja_animation = NodePath("../../AnimatedSprite2D")
+ninja_forward_raycast = NodePath("../../NinjaForwardRaycast")
 boofbro_raycast = NodePath("../../BoofBroRaycast")
 
 [node name="Ninja1Idle" type="Node" parent="NinjaStateMachine" node_paths=PackedStringArray("ninja", "ninja_animation", "boofbro_raycast", "ninja_raycast")]
@@ -155,8 +155,9 @@ node_a = NodePath("..")
 node_b = NodePath("../BounceHead")
 
 [node name="NinjaForwardRaycast" type="RayCast2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 7)
 target_position = Vector2(-24, 0)
+collision_mask = 2
 
 [node name="BoofBroRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, 1)

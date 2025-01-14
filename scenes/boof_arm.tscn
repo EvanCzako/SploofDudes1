@@ -39,7 +39,7 @@ animations = [{
 }]
 
 [node name="BoofArm" type="Node2D"]
-z_index = 5
+z_index = 1
 script = ExtResource("1_w2j60")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

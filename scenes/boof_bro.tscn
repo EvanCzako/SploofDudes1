@@ -10,9 +10,6 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xgx8c"]
 friction = 0.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk4m0"]
-size = Vector2(25.6163, 19.0272)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_5enxr"]
 animations = [{
 "frames": [{
@@ -41,6 +38,10 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_skt1g"]
+radius = 9.02721
+height = 20.832
+
 [node name="BoofBro" type="RigidBody2D"]
 z_index = 5
 collision_layer = 5
@@ -50,11 +51,6 @@ lock_rotation = true
 contact_monitor = true
 max_contacts_reported = 3
 script = ExtResource("1_c5nhf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -13.7004)
-scale = Vector2(0.429414, 1.44009)
-shape = SubResource("RectangleShape2D_gk4m0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
@@ -68,7 +64,7 @@ position = Vector2(1, -16)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -47)
 zoom = Vector2(2.5, 2.5)
-limit_left = -700
+limit_left = -400
 limit_bottom = 100
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
@@ -84,5 +80,10 @@ target_position = Vector2(0, 5)
 collide_with_areas = true
 
 [node name="FloorRays" type="Node" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.90735e-06, -15)
+scale = Vector2(0.429414, 1.44009)
+shape = SubResource("CapsuleShape2D_skt1g")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

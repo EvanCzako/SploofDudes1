@@ -3,11 +3,14 @@ class_name Ninja1Chase
 
 @export var ninja: RigidBody2D
 @export var ninja_animation: AnimatedSprite2D
+@export var ninja_forward_raycast: RayCast2D
 @export var MAX_SPEED = 110
 @export var boofbro_raycast: RayCast2D
 
+const JUMP_IMPULSE = 650.0
 var ACC = randf_range(25000, 35000)
-
+var is_jumping: bool = false
+var jump_cooldown = 0.5
 var boof_bro: RigidBody2D
 
 var move_direction: float
@@ -27,11 +30,34 @@ func Update(delta: float):
 func PhysicsUpdate(delta: float):
 	if !ninja:
 		return
+		
+	if abs(ninja.linear_velocity.y) > 1:
+		ninja_animation.play("jump")
+	else:
+		ninja_animation.play("chase")
+	
+	jump_cooldown -= delta
+	if is_jumping and abs(ninja.linear_velocity.y) < 0.1:
+		for body in ninja.get_colliding_bodies():
+			if "MapCollision" in body.get_groups():
+				is_jumping = false
+				jump_cooldown = 0.5
+	
+	if ninja_forward_raycast.is_colliding() and !is_jumping and jump_cooldown < 0:
+		is_jumping = true
+		print("I SHOULD JUMP")
+		print(randf())
+		ninja.apply_central_impulse(Vector2(0,-JUMP_IMPULSE))
+	
 	
 	shuriken_time -= delta
 	var dir_to_boof_bro = sign(boof_bro.position.x - ninja.position.x)
 	var distance_from_player = ninja.position.distance_to(boof_bro.position)
 	ninja_animation.flip_h = dir_to_boof_bro >= 0
+	if dir_to_boof_bro > 0:
+		ninja_forward_raycast.target_position = Vector2(24,0)
+	else:
+		ninja_forward_raycast.target_position = Vector2(-24,0)
 	
 	if !((sign(dir_to_boof_bro) == sign(ninja.linear_velocity.x)) && abs(ninja.linear_velocity.x) > MAX_SPEED):
 		ninja.apply_central_force(Vector2(dir_to_boof_bro*ACC*delta, 0))
