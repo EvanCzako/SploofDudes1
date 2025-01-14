@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcouxcda5rppr"]
+[gd_scene load_steps=17 format=3 uid="uid://dcouxcda5rppr"]
 
 [ext_resource type="Texture2D" uid="uid://bypsy2imx1dx5" path="res://assets/sprites/world_tileset.png" id="1_7xsgy"]
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_vq6kk"]
 [ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_r814i"]
 [ext_resource type="Texture2D" uid="uid://bnftsne4vug5k" path="res://assets/sprites/SunsetLayer1/l0_sunset11.png" id="4_5mrcs"]
 [ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="5_bxul3"]
+[ext_resource type="Texture2D" uid="uid://0nhrk6lplf2i" path="res://assets/sprites/SunsetLayer1/sunset_20.png" id="6_d8t3i"]
 [ext_resource type="Texture2D" uid="uid://d2msf6g33anuh" path="res://assets/sprites/SunsetLayer1/l2_sunset11.png" id="6_vyrad"]
 [ext_resource type="Script" path="res://scripts/killzone.gd" id="7_hch2t"]
 [ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="9_0we7g"]
@@ -203,9 +204,9 @@ repeat_size = Vector2(1280, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Sunset"]
 z_index = -10
-position = Vector2(338, -169)
+position = Vector2(338, -200)
 scale = Vector2(2, 2)
-texture = ExtResource("4_5mrcs")
+texture = ExtResource("6_d8t3i")
 
 [node name="Hills" type="Parallax2D" parent="ParallaxLayers"]
 scroll_scale = Vector2(0.4, 0.8)
@@ -214,7 +215,7 @@ repeat_size = Vector2(1280, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Hills"]
 modulate = Color(0.529412, 0, 1, 0.752941)
 z_index = -10
-position = Vector2(305, -154)
+position = Vector2(305, -200)
 scale = Vector2(2, 3)
 texture = ExtResource("5_bxul3")
 
@@ -244,11 +245,11 @@ wait_time = 2.0
 [node name="EnvObs" type="Node" parent="."]
 
 [node name="Crate1" parent="EnvObs" instance=ExtResource("9_0we7g")]
-position = Vector2(-159, -114)
+position = Vector2(478, -107)
 rotation = 1.5708
 
 [node name="Crate2" parent="EnvObs" instance=ExtResource("9_0we7g")]
-position = Vector2(-190, -120)
+position = Vector2(288, -102)
 rotation = 1.5708
 
 [node name="Crate3" parent="EnvObs" instance=ExtResource("9_0we7g")]
@@ -306,9 +307,6 @@ texture = ExtResource("11_il3ac")
 
 [node name="Ninja1" parent="Ninjas" instance=ExtResource("9_ghg3k")]
 position = Vector2(397, -86)
-
-[node name="Ninja2" parent="Ninjas" instance=ExtResource("9_ghg3k")]
-position = Vector2(770, -98)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

@@ -6,9 +6,10 @@ class_name Ninja1Idle
 @export var ninja_animation: AnimatedSprite2D
 @export var boofbro_raycast: RayCast2D
 @export var ninja_raycast: RayCast2D
+
 const ACC = 70000.0
 var boof_bro: RigidBody2D
-
+var turn_cooldown: float = 0.25
 var move_direction: float
 var wander_time: float
 
@@ -27,6 +28,8 @@ func Exit():
 	pass
 	
 func Update(delta: float):
+	if turn_cooldown > 0:
+		turn_cooldown -= delta
 	if wander_time > 0:
 		wander_time -= delta
 	else:
@@ -46,7 +49,18 @@ func PhysicsUpdate(delta: float):
 			ninja_animation.play("chase")
 			ninja_raycast.target_position = Vector2(25,0)
 		elif move_direction == 0:
+			print("DAMP")
+			print(randf())
+			var x_damping = -sign(ninja.linear_velocity.x)*delta*1000*abs(ninja.linear_velocity.x)
+			ninja.apply_central_force(Vector2(x_damping, 0))
 			ninja_animation.play("idle")
 		
-		if(abs(ninja.linear_velocity.x) < move_speed):
+		if (abs(ninja.linear_velocity.x) < move_speed) or (sign(ninja.linear_velocity.x) != move_direction):
 			ninja.apply_central_force(Vector2(move_direction*ACC*delta, 0))
+
+		# Check for walls
+		if ninja_raycast.is_colliding() and turn_cooldown < 0:
+			if ("environment" in ninja_raycast.get_collider().get_groups()) or \
+			("MapCollision" in ninja_raycast.get_collider().get_groups()):
+				move_direction *= -1
+				turn_cooldown = 0.25

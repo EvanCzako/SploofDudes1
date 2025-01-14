@@ -67,7 +67,7 @@ func process_game_logic(delta):
 		
 	if current_state == ninja_1_chase:
 		chase_cooldown -= delta
-		if !can_see_boofbro:
+		if !can_see_boofbro or (boofbro.global_position-ninja_1.global_position).length() > 200:
 			if chase_cooldown <= 0:
 				current_state.Exit()
 				ninja_1_idle.Enter()
