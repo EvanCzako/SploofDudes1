@@ -21,7 +21,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(z_index)
 	yDir = 0
 	xDir = 0
 	if rotation_map_key in ARM_ROTATION_MAP:

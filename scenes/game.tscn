@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="9_0we7g"]
 [ext_resource type="PackedScene" uid="uid://b3575872h55bb" path="res://scenes/ninja_1.tscn" id="9_ghg3k"]
 [ext_resource type="PackedScene" uid="uid://bsv5hesajaglo" path="res://scenes/gas_can.tscn" id="9_t75ao"]
-[ext_resource type="Texture2D" uid="uid://bao1tx5eo1xps" path="res://assets/sprites/MapChunks/Layer 1_sprite_1.png" id="10_fsujo"]
-[ext_resource type="Texture2D" uid="uid://bgsf0m6uucsjk" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="11_il3ac"]
+[ext_resource type="Texture2D" uid="uid://dox07xgkkrho6" path="res://assets/sprites/MapChunks/Layer 1_sprite_1.png" id="10_fsujo"]
+[ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="11_il3ac"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vd76n"]
 texture = ExtResource("1_7xsgy")
@@ -251,6 +251,22 @@ rotation = 1.5708
 position = Vector2(-190, -120)
 rotation = 1.5708
 
+[node name="Crate3" parent="EnvObs" instance=ExtResource("9_0we7g")]
+position = Vector2(578, -105)
+rotation = 3.14159
+
+[node name="Crate4" parent="EnvObs" instance=ExtResource("9_0we7g")]
+position = Vector2(582, -81)
+rotation = 3.14159
+
+[node name="Crate5" parent="EnvObs" instance=ExtResource("9_0we7g")]
+position = Vector2(652, -79)
+rotation = 3.14159
+
+[node name="Crate6" parent="EnvObs" instance=ExtResource("9_0we7g")]
+position = Vector2(1109, -80)
+rotation = 3.14159
+
 [node name="GasCan" parent="EnvObs" instance=ExtResource("9_t75ao")]
 position = Vector2(-27, -108)
 max_contacts_reported = 3
@@ -289,7 +305,10 @@ texture = ExtResource("11_il3ac")
 [node name="Ninjas" type="Node" parent="."]
 
 [node name="Ninja1" parent="Ninjas" instance=ExtResource("9_ghg3k")]
-position = Vector2(-293, -149)
+position = Vector2(397, -86)
+
+[node name="Ninja2" parent="Ninjas" instance=ExtResource("9_ghg3k")]
+position = Vector2(770, -98)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

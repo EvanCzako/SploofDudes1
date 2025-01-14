@@ -39,14 +39,12 @@ func PhysicsUpdate(delta: float):
 	jump_cooldown -= delta
 	if is_jumping and abs(ninja.linear_velocity.y) < 0.1:
 		for body in ninja.get_colliding_bodies():
-			if "MapCollision" in body.get_groups():
+			if "MapCollision" in body.get_groups() or "environment" in body.get_groups():
 				is_jumping = false
 				jump_cooldown = 0.5
 	
 	if ninja_forward_raycast.is_colliding() and !is_jumping and jump_cooldown < 0:
 		is_jumping = true
-		print("I SHOULD JUMP")
-		print(randf())
 		ninja.apply_central_impulse(Vector2(0,-JUMP_IMPULSE))
 	
 	
