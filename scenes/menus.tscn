@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://uy3pnhocmtcb"]
+
+[ext_resource type="PackedScene" uid="uid://bpdm3uprto506" path="res://scenes/pause_menu.tscn" id="1_cjxn0"]
+[ext_resource type="PackedScene" uid="uid://cyst5hgeio5c1" path="res://scenes/level_menu.tscn" id="3_cd7jx"]
+
+[node name="Menus" type="Node"]
+process_mode = 3
+
+[node name="LevelMenu" parent="." instance=ExtResource("3_cd7jx")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_cjxn0")]

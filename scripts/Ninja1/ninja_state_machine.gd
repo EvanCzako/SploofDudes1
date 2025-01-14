@@ -84,7 +84,8 @@ func process_game_logic(delta):
 			current_state = ninja_1_chase
 	#
 func process_physics_logic(delta):
-	boofbro_raycast.target_position = boofbro.global_position - ninja_1.global_position + Vector2(0,-5)
+	boofbro_raycast.target_position = (boofbro.global_position + Vector2(0,-30)) - \
+	(ninja_1.global_position + Vector2(0,-5))
 	boofbro_raycast.global_position = ninja_1.global_position
 	
 	if boofbro_raycast.get_collider() == boofbro:

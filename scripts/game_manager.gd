@@ -5,6 +5,9 @@ var BOOFBRO: RigidBody2D
 @onready var shurikens: Node = $Shuriken
 @export var GRAVITY_SCALE = 1
 @export var player_info_live: Dictionary
+@export var menu_info: Dictionary = {
+	"active_menu": null
+}
 
 func reset_inits():
 	Engine.time_scale = 1
