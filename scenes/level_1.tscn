@@ -1,26 +1,26 @@
 [gd_scene load_steps=14 format=3 uid="uid://dcouxcda5rppr"]
 
-[ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_vq6kk"]
-[ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_r814i"]
-[ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="5_bxul3"]
-[ext_resource type="Texture2D" uid="uid://0nhrk6lplf2i" path="res://assets/sprites/SunsetLayer1/sunset_20.png" id="6_d8t3i"]
-[ext_resource type="Texture2D" uid="uid://d2msf6g33anuh" path="res://assets/sprites/SunsetLayer1/l2_sunset11.png" id="6_vyrad"]
-[ext_resource type="Script" path="res://scripts/killzone.gd" id="7_hch2t"]
-[ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="9_0we7g"]
-[ext_resource type="PackedScene" uid="uid://b3575872h55bb" path="res://scenes/ninja_1.tscn" id="9_ghg3k"]
-[ext_resource type="PackedScene" uid="uid://bsv5hesajaglo" path="res://scenes/gas_can.tscn" id="9_t75ao"]
-[ext_resource type="Texture2D" uid="uid://dox07xgkkrho6" path="res://assets/sprites/MapChunks/Layer 1_sprite_1.png" id="10_fsujo"]
-[ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="11_il3ac"]
-[ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_a8h0l"]
+[ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_2sx5a"]
+[ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_ay75g"]
+[ext_resource type="Texture2D" uid="uid://0nhrk6lplf2i" path="res://assets/sprites/SunsetLayer1/sunset_20.png" id="3_mxjxp"]
+[ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="4_nigg3"]
+[ext_resource type="Texture2D" uid="uid://d2msf6g33anuh" path="res://assets/sprites/SunsetLayer1/l2_sunset11.png" id="5_757oj"]
+[ext_resource type="Script" path="res://scripts/killzone.gd" id="6_318kb"]
+[ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="7_yuu2l"]
+[ext_resource type="PackedScene" uid="uid://bsv5hesajaglo" path="res://scenes/gas_can.tscn" id="8_lr5ae"]
+[ext_resource type="Texture2D" uid="uid://dox07xgkkrho6" path="res://assets/sprites/MapChunks/Layer 1_sprite_1.png" id="9_4khsp"]
+[ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="10_mpwnm"]
+[ext_resource type="PackedScene" uid="uid://b3575872h55bb" path="res://scenes/ninja_1.tscn" id="11_4846h"]
+[ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_4o8sl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c70t"]
 size = Vector2(4559, 84)
 
 [node name="Level1" type="Node2D"]
 
-[node name="HUD" parent="." instance=ExtResource("1_vq6kk")]
+[node name="HUD" parent="." instance=ExtResource("1_2sx5a")]
 
-[node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_r814i")]
+[node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_ay75g")]
 unique_name_in_owner = true
 position = Vector2(-128, -162)
 
@@ -34,7 +34,7 @@ repeat_size = Vector2(1280, 0)
 z_index = -10
 position = Vector2(338, -200)
 scale = Vector2(2, 2)
-texture = ExtResource("6_d8t3i")
+texture = ExtResource("3_mxjxp")
 
 [node name="Hills" type="Parallax2D" parent="ParallaxLayers"]
 scroll_scale = Vector2(0.4, 0.8)
@@ -45,7 +45,7 @@ modulate = Color(0.529412, 0, 1, 0.752941)
 z_index = -10
 position = Vector2(305, -200)
 scale = Vector2(2, 3)
-texture = ExtResource("5_bxul3")
+texture = ExtResource("4_nigg3")
 
 [node name="Clouds" type="Parallax2D" parent="ParallaxLayers"]
 scroll_scale = Vector2(0.2, 0.8)
@@ -57,11 +57,11 @@ modulate = Color(1, 0.901961, 1, 0.670588)
 z_index = -10
 position = Vector2(182, 0)
 scale = Vector2(2, 2)
-texture = ExtResource("6_vyrad")
+texture = ExtResource("5_757oj")
 
 [node name="Killzone" type="Area2D" parent="."]
 collision_mask = 3
-script = ExtResource("7_hch2t")
+script = ExtResource("6_318kb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(818, 362)
@@ -72,51 +72,51 @@ wait_time = 2.0
 
 [node name="EnvObs" type="Node" parent="."]
 
-[node name="Crate1" parent="EnvObs" instance=ExtResource("9_0we7g")]
+[node name="Crate1" parent="EnvObs" instance=ExtResource("7_yuu2l")]
 position = Vector2(478, -107)
 rotation = 1.5708
 
-[node name="Crate2" parent="EnvObs" instance=ExtResource("9_0we7g")]
+[node name="Crate2" parent="EnvObs" instance=ExtResource("7_yuu2l")]
 position = Vector2(288, -102)
 rotation = 1.5708
 
-[node name="Crate7" parent="EnvObs" instance=ExtResource("9_0we7g")]
+[node name="Crate7" parent="EnvObs" instance=ExtResource("7_yuu2l")]
 position = Vector2(1352, -98)
 rotation = 1.5708
 
-[node name="Crate3" parent="EnvObs" instance=ExtResource("9_0we7g")]
+[node name="Crate3" parent="EnvObs" instance=ExtResource("7_yuu2l")]
 position = Vector2(578, -105)
 rotation = 3.14159
 
-[node name="Crate4" parent="EnvObs" instance=ExtResource("9_0we7g")]
+[node name="Crate4" parent="EnvObs" instance=ExtResource("7_yuu2l")]
 position = Vector2(582, -81)
 rotation = 3.14159
 
-[node name="Crate5" parent="EnvObs" instance=ExtResource("9_0we7g")]
+[node name="Crate5" parent="EnvObs" instance=ExtResource("7_yuu2l")]
 position = Vector2(652, -79)
 rotation = 3.14159
 
-[node name="Crate6" parent="EnvObs" instance=ExtResource("9_0we7g")]
+[node name="Crate6" parent="EnvObs" instance=ExtResource("7_yuu2l")]
 position = Vector2(1109, -80)
 rotation = 3.14159
 
-[node name="GasCan" parent="EnvObs" instance=ExtResource("9_t75ao")]
+[node name="GasCan" parent="EnvObs" instance=ExtResource("8_lr5ae")]
 position = Vector2(-27, -108)
 max_contacts_reported = 3
 
-[node name="GasCan2" parent="EnvObs" instance=ExtResource("9_t75ao")]
+[node name="GasCan2" parent="EnvObs" instance=ExtResource("8_lr5ae")]
 position = Vector2(35, -112)
 max_contacts_reported = 3
 
-[node name="GasCan4" parent="EnvObs" instance=ExtResource("9_t75ao")]
+[node name="GasCan4" parent="EnvObs" instance=ExtResource("8_lr5ae")]
 position = Vector2(130, -104)
 max_contacts_reported = 3
 
-[node name="GasCan5" parent="EnvObs" instance=ExtResource("9_t75ao")]
+[node name="GasCan5" parent="EnvObs" instance=ExtResource("8_lr5ae")]
 position = Vector2(105, -102)
 max_contacts_reported = 3
 
-[node name="GasCan6" parent="EnvObs" instance=ExtResource("9_t75ao")]
+[node name="GasCan6" parent="EnvObs" instance=ExtResource("8_lr5ae")]
 position = Vector2(1026, -73)
 max_contacts_reported = 3
 
@@ -132,27 +132,27 @@ polygon = PackedVector2Array(250, 230, 250, -761, 374, -768, 375, -134, 416, -13
 
 [node name="Sprite2D" type="Sprite2D" parent="MapCollisionMasks/Area2D2"]
 position = Vector2(502, -230)
-texture = ExtResource("10_fsujo")
+texture = ExtResource("9_4khsp")
 
 [node name="Sprite2D2" type="Sprite2D" parent="MapCollisionMasks/Area2D2"]
 z_index = 7
 position = Vector2(502, -230)
-texture = ExtResource("11_il3ac")
+texture = ExtResource("10_mpwnm")
 
 [node name="Ninjas" type="Node" parent="."]
 
-[node name="Ninja1" parent="Ninjas" instance=ExtResource("9_ghg3k")]
+[node name="Ninja1" parent="Ninjas" instance=ExtResource("11_4846h")]
 position = Vector2(397, -86)
 
-[node name="Ninja2" parent="Ninjas" instance=ExtResource("9_ghg3k")]
+[node name="Ninja2" parent="Ninjas" instance=ExtResource("11_4846h")]
 position = Vector2(1189, -94)
 
-[node name="Ninja3" parent="Ninjas" instance=ExtResource("9_ghg3k")]
+[node name="Ninja3" parent="Ninjas" instance=ExtResource("11_4846h")]
 position = Vector2(1265, -95)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Menus" parent="CanvasLayer" instance=ExtResource("12_a8h0l")]
+[node name="Menus" parent="CanvasLayer" instance=ExtResource("12_4o8sl")]
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

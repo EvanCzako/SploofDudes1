@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3e7qews5y0ic"]
+
+[ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_7kt26"]
+[ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_qttdx"]
+[ext_resource type="Texture2D" uid="uid://0nhrk6lplf2i" path="res://assets/sprites/SunsetLayer1/sunset_20.png" id="3_sudxa"]
+[ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="4_lsuu5"]
+[ext_resource type="Texture2D" uid="uid://d2msf6g33anuh" path="res://assets/sprites/SunsetLayer1/l2_sunset11.png" id="5_io8ms"]
+[ext_resource type="Script" path="res://scripts/killzone.gd" id="6_avyox"]
+[ext_resource type="Texture2D" uid="uid://dox07xgkkrho6" path="res://assets/sprites/MapChunks/Layer 1_sprite_1.png" id="9_atw65"]
+[ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="10_jjovq"]
+[ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_vpjt3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5c70t"]
+size = Vector2(4559, 84)
+
+[node name="Level1" type="Node2D"]
+
+[node name="HUD" parent="." instance=ExtResource("1_7kt26")]
+
+[node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_qttdx")]
+unique_name_in_owner = true
+position = Vector2(-128, -162)
+
+[node name="ParallaxLayers" type="Node" parent="."]
+
+[node name="Sunset" type="Parallax2D" parent="ParallaxLayers"]
+scroll_scale = Vector2(0.1, 0.9)
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Sunset"]
+z_index = -10
+position = Vector2(338, -200)
+scale = Vector2(2, 2)
+texture = ExtResource("3_sudxa")
+
+[node name="Hills" type="Parallax2D" parent="ParallaxLayers"]
+scroll_scale = Vector2(0.4, 0.8)
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Hills"]
+modulate = Color(0.529412, 0, 1, 0.752941)
+z_index = -10
+position = Vector2(305, -200)
+scale = Vector2(2, 3)
+texture = ExtResource("4_lsuu5")
+
+[node name="Clouds" type="Parallax2D" parent="ParallaxLayers"]
+scroll_scale = Vector2(0.2, 0.8)
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(15, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Clouds"]
+modulate = Color(1, 0.901961, 1, 0.670588)
+z_index = -10
+position = Vector2(182, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("5_io8ms")
+
+[node name="Killzone" type="Area2D" parent="."]
+collision_mask = 3
+script = ExtResource("6_avyox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(818, 362)
+shape = SubResource("RectangleShape2D_5c70t")
+
+[node name="Timer" type="Timer" parent="Killzone"]
+wait_time = 2.0
+
+[node name="EnvObs" type="Node" parent="."]
+
+[node name="MapCollisionMasks" type="Node" parent="." groups=["MapCollision"]]
+
+[node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
+collision_layer = 255
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2" groups=["MapCollision"]]
+position = Vector2(-745, 39)
+polygon = PackedVector2Array(250, 230, 250, -761, 374, -768, 375, -134, 416, -134, 465, -100, 2247, -100, 2245, 173, 954, 209)
+
+[node name="Sprite2D" type="Sprite2D" parent="MapCollisionMasks/Area2D2"]
+position = Vector2(502, -230)
+texture = ExtResource("9_atw65")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MapCollisionMasks/Area2D2"]
+z_index = 7
+position = Vector2(502, -230)
+texture = ExtResource("10_jjovq")
+
+[node name="Ninjas" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Menus" parent="CanvasLayer" instance=ExtResource("12_vpjt3")]
+
+[connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
+[connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

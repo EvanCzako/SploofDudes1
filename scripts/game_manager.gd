@@ -13,6 +13,10 @@ func reset_inits():
 	Engine.time_scale = 1
 	bullets = $Bullets
 	shurikens = $Shurikens
+	for bullet in bullets.get_children():
+		bullet.queue_free()
+	for shurry in shurikens.get_children():
+		shurry.queue_free()
 	player_info_live = {
 		"muzzle_blocked": false,
 		"health": 6,
