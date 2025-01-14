@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://bypsy2imx1dx5" path="res://assets/sprites/world_tileset.png" id="1_7xsgy"]
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_vq6kk"]
 [ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_r814i"]
-[ext_resource type="Texture2D" uid="uid://bnftsne4vug5k" path="res://assets/sprites/SunsetLayer1/l0_sunset11.png" id="4_5mrcs"]
 [ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="5_bxul3"]
 [ext_resource type="Texture2D" uid="uid://0nhrk6lplf2i" path="res://assets/sprites/SunsetLayer1/sunset_20.png" id="6_d8t3i"]
 [ext_resource type="Texture2D" uid="uid://d2msf6g33anuh" path="res://assets/sprites/SunsetLayer1/l2_sunset11.png" id="6_vyrad"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bsv5hesajaglo" path="res://scenes/gas_can.tscn" id="9_t75ao"]
 [ext_resource type="Texture2D" uid="uid://dox07xgkkrho6" path="res://assets/sprites/MapChunks/Layer 1_sprite_1.png" id="10_fsujo"]
 [ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="11_il3ac"]
+[ext_resource type="PackedScene" uid="uid://bpdm3uprto506" path="res://scenes/pause_menu.tscn" id="13_ky5fg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vd76n"]
 texture = ExtResource("1_7xsgy")
@@ -157,45 +157,6 @@ layer_0/tile_data = PackedInt32Array(-26, 0, 1, -25, 0, 1, -24, 0, 1, -23, 0, 1,
 unique_name_in_owner = true
 position = Vector2(-128, -162)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -217.0
-offset_top = -920.0
-offset_right = 1722.0
-offset_bottom = -380.0
-grow_vertical = 0
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer/HBoxContainer"]
-visible = false
-
-[node name="SunsetLayer" type="ParallaxLayer" parent="CanvasLayer/HBoxContainer/ParallaxBackground"]
-visible = false
-motion_scale = Vector2(2.08165e-12, 0.5)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/HBoxContainer/ParallaxBackground/SunsetLayer"]
-visible = false
-position = Vector2(-107, -239)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("4_5mrcs")
-centered = false
-
-[node name="HillLayer" type="ParallaxLayer" parent="CanvasLayer/HBoxContainer/ParallaxBackground"]
-visible = false
-motion_scale = Vector2(0.25, 0.75)
-motion_mirroring = Vector2(960, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/HBoxContainer/ParallaxBackground/HillLayer"]
-visible = false
-position = Vector2(-223, -290)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("5_bxul3")
-centered = false
-
 [node name="ParallaxLayers" type="Node" parent="."]
 
 [node name="Sunset" type="Parallax2D" parent="ParallaxLayers"]
@@ -307,6 +268,10 @@ texture = ExtResource("11_il3ac")
 
 [node name="Ninja1" parent="Ninjas" instance=ExtResource("9_ghg3k")]
 position = Vector2(397, -86)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("13_ky5fg")]
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

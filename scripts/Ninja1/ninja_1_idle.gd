@@ -49,8 +49,6 @@ func PhysicsUpdate(delta: float):
 			ninja_animation.play("chase")
 			ninja_raycast.target_position = Vector2(25,0)
 		elif move_direction == 0:
-			print("DAMP")
-			print(randf())
 			var x_damping = -sign(ninja.linear_velocity.x)*delta*1000*abs(ninja.linear_velocity.x)
 			ninja.apply_central_force(Vector2(x_damping, 0))
 			ninja_animation.play("idle")
