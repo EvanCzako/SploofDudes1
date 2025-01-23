@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcouxcda5rppr"]
+[gd_scene load_steps=16 format=3 uid="uid://dcouxcda5rppr"]
 
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_2sx5a"]
 [ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_ay75g"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="10_mpwnm"]
 [ext_resource type="PackedScene" uid="uid://b3575872h55bb" path="res://scenes/ninja_1.tscn" id="11_4846h"]
 [ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_4o8sl"]
+[ext_resource type="PackedScene" uid="uid://b2ej8p8vbv4fa" path="res://scenes/RecycleBin/recycle_bin.tscn" id="13_8qgpx"]
+[ext_resource type="PackedScene" uid="uid://7dff4xtqswft" path="res://scenes/street_lamp_1.tscn" id="14_u1q03"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c70t"]
 size = Vector2(4559, 84)
@@ -153,6 +155,21 @@ position = Vector2(1265, -95)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Menus" parent="CanvasLayer" instance=ExtResource("12_4o8sl")]
+
+[node name="RecycleBin" parent="." instance=ExtResource("13_8qgpx")]
+position = Vector2(-221, -70)
+
+[node name="RecycleBin2" parent="." instance=ExtResource("13_8qgpx")]
+position = Vector2(198, -65)
+
+[node name="RecycleBin3" parent="." instance=ExtResource("13_8qgpx")]
+position = Vector2(66, -69)
+
+[node name="StreetLamp" parent="." instance=ExtResource("14_u1q03")]
+position = Vector2(-186, -161)
+
+[node name="StreetLamp2" parent="." instance=ExtResource("14_u1q03")]
+position = Vector2(1463, -161)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

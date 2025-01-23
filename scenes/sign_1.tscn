@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn5l3jct4wyjs"]
+
+[ext_resource type="Script" path="res://scripts/sign_1.gd" id="1_nvxyr"]
+[ext_resource type="Texture2D" uid="uid://bjafbkejrifqv" path="res://assets/sprites/Env/sign_1.png" id="2_w8vj5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7ish"]
+size = Vector2(16, 20)
+
+[node name="Sign1" type="Area2D"]
+position = Vector2(0, -16)
+collision_layer = 0
+script = ExtResource("1_nvxyr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_u7ish")
+
+[node name="Area2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_w8vj5")

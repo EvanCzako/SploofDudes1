@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bys1wa765gvba"]
+
+[ext_resource type="Texture2D" uid="uid://boei0ju5nmhjm" path="res://assets/sprites/Env/RecycleBin/sprite_3.png" id="1_hme0d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_30bup"]
+radius = 2.0
+
+[node name="GarboObj1" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 3
+mass = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_30bup")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, -9)
+texture = ExtResource("1_hme0d")

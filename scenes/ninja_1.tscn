@@ -93,7 +93,7 @@ max_contacts_reported = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p68a6")
-animation = &"jump"
+animation = &"attack"
 
 [node name="NinjaCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 1)

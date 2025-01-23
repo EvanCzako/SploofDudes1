@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bilm6fvkfkxj6"]
+
+[ext_resource type="Texture2D" uid="uid://c8kpbaihc0s5b" path="res://assets/sprites/Env/RecycleBin/sprite_2.png" id="1_8np58"]
+
+[node name="BinLid" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 3
+mass = 0.2
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 4)
+polygon = PackedVector2Array(-7, -5, -8, -4, -7, -3, 7, -3, 8, -4, 7, -5)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 4)
+texture = ExtResource("1_8np58")

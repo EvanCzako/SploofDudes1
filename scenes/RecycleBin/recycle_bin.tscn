@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2ej8p8vbv4fa"]
+
+[ext_resource type="PackedScene" uid="uid://byq1u5ujjxg3o" path="res://scenes/RecycleBin/bin_base.tscn" id="1_e4mvm"]
+[ext_resource type="PackedScene" uid="uid://bilm6fvkfkxj6" path="res://scenes/RecycleBin/bin_lid.tscn" id="2_aqxlj"]
+[ext_resource type="PackedScene" uid="uid://bys1wa765gvba" path="res://scenes/RecycleBin/garbo_obj_1.tscn" id="3_q270a"]
+[ext_resource type="PackedScene" uid="uid://b6butoqkyvos6" path="res://scenes/RecycleBin/garbo_obj_2.tscn" id="4_sa4t0"]
+[ext_resource type="PackedScene" uid="uid://cxsqgx8ry2t33" path="res://scenes/RecycleBin/garbo_obj_3.tscn" id="5_q8seq"]
+
+[node name="RecycleBin" type="Node2D"]
+
+[node name="BinBase" parent="." instance=ExtResource("1_e4mvm")]
+position = Vector2(0, -10)
+
+[node name="BinLid" parent="." instance=ExtResource("2_aqxlj")]
+position = Vector2(0, -20)
+
+[node name="GarboObj1" parent="." instance=ExtResource("3_q270a")]
+z_index = -1
+position = Vector2(-2, -15)
+
+[node name="GarboObj2" parent="." instance=ExtResource("4_sa4t0")]
+z_index = -1
+position = Vector2(3, -16)
+
+[node name="GarboObj3" parent="." instance=ExtResource("5_q8seq")]
+z_index = -1
+position = Vector2(0, -7)
+
+[node name="GarboObj4" parent="." instance=ExtResource("4_sa4t0")]
+z_index = -1
+position = Vector2(3, -12)
