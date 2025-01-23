@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdcu77upcisqw"]
+
+[ext_resource type="Texture2D" uid="uid://b1w3pub2kxxg8" path="res://assets/sprites/StreetLamp1/sprite_2.png" id="1_8q1rs"]
+[ext_resource type="Texture2D" uid="uid://rkyrmgfsdrxu" path="res://assets/sprites/StreetLamp1/sprite_1.png" id="2_kfeiq"]
+[ext_resource type="Script" path="res://scripts/street_lamp_1.gd" id="3_0pvuw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mw5gt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8q1rs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kfeiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_8q1rs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kfeiq")
+}],
+"loop": false,
+"name": &"flicker",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kfeiq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="StreetLamp" type="AnimatedSprite2D"]
+position = Vector2(0, -100)
+sprite_frames = SubResource("SpriteFrames_mw5gt")
+animation = &"flicker"
+frame = 3
+frame_progress = 1.0
+script = ExtResource("3_0pvuw")

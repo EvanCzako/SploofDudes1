@@ -92,6 +92,12 @@ func hurt_ninja(ninja: RigidBody2D, amount: float) -> void:
 
 	ninja.get_node("NinjaStateMachine").hurt_ninja_func(5)
 
+func add_collision_exceptions(enemyNodes: Array[Node]):
+	for enemy in enemyNodes:
+		for otherEnemy in enemyNodes:
+			if enemy != otherEnemy:
+				enemy.add_collision_exception_with(otherEnemy)
+
 func print_vars():
 	print("===========================")
 	print(player_info_live)

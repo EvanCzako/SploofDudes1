@@ -7,11 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://cxsqgx8ry2t33" path="res://scenes/RecycleBin/garbo_obj_3.tscn" id="5_q8seq"]
 
 [node name="RecycleBin" type="Node2D"]
+z_index = 6
 
-[node name="BinBase" parent="." instance=ExtResource("1_e4mvm")]
+[node name="BinBase" parent="." groups=["environment"] instance=ExtResource("1_e4mvm")]
 position = Vector2(0, -10)
 
 [node name="BinLid" parent="." instance=ExtResource("2_aqxlj")]
+z_index = -1
 position = Vector2(0, -20)
 
 [node name="GarboObj1" parent="." instance=ExtResource("3_q270a")]
