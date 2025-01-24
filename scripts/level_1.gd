@@ -4,7 +4,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GameManager.add_collision_exceptions(ninjas.get_children()) # Replace with function body.
+	GameManager.add_collision_exceptions(ninjas.get_children()) 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

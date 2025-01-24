@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcouxcda5rppr"]
+[gd_scene load_steps=19 format=3 uid="uid://dcouxcda5rppr"]
 
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_2sx5a"]
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_r15f3"]
@@ -16,18 +16,15 @@
 [ext_resource type="PackedScene" uid="uid://b2ej8p8vbv4fa" path="res://scenes/RecycleBin/recycle_bin.tscn" id="13_8qgpx"]
 [ext_resource type="PackedScene" uid="uid://7dff4xtqswft" path="res://scenes/street_lamp_flicker.tscn" id="14_u1q03"]
 [ext_resource type="PackedScene" uid="uid://dn5l3jct4wyjs" path="res://scenes/sign_1.tscn" id="15_x7ofj"]
+[ext_resource type="PackedScene" uid="uid://bdcu77upcisqw" path="res://scenes/street_lamp_no_flicker.tscn" id="17_022ie"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c70t"]
-size = Vector2(4559, 84)
+size = Vector2(7633, 96)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_r15f3")
 
 [node name="HUD" parent="." instance=ExtResource("1_2sx5a")]
-
-[node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_ay75g")]
-unique_name_in_owner = true
-position = Vector2(-128, -162)
 
 [node name="ParallaxLayers" type="Node" parent="."]
 
@@ -69,7 +66,7 @@ collision_mask = 3
 script = ExtResource("6_318kb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(818, 362)
+position = Vector2(845.5, 368)
 shape = SubResource("RectangleShape2D_5c70t")
 
 [node name="Timer" type="Timer" parent="Killzone"]
@@ -159,20 +156,42 @@ position = Vector2(1265, -95)
 
 [node name="Menus" parent="CanvasLayer" instance=ExtResource("12_4o8sl")]
 
-[node name="StreetLamp" parent="." instance=ExtResource("14_u1q03")]
-position = Vector2(-186, -161)
-
-[node name="StreetLamp2" parent="." instance=ExtResource("14_u1q03")]
-position = Vector2(1463, -161)
-
-[node name="Sign1" parent="." instance=ExtResource("15_x7ofj")]
-position = Vector2(-336, -113)
+[node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_ay75g")]
+unique_name_in_owner = true
+position = Vector2(-80, -111)
 
 [node name="RecycleBin" parent="." instance=ExtResource("13_8qgpx")]
 position = Vector2(-237, -62)
 
 [node name="RecycleBin2" parent="." instance=ExtResource("13_8qgpx")]
 position = Vector2(65, -63)
+
+[node name="Sign1" parent="." instance=ExtResource("15_x7ofj")]
+position = Vector2(-336, -113)
+sign_text = "420 Boof Dr"
+
+[node name="Sign2" parent="." instance=ExtResource("15_x7ofj")]
+position = Vector2(-153, -77)
+sign_text = "Ayo, WASD for movement, arrows for aiming, space to shoot!"
+
+[node name="StreetLamps" type="Node" parent="."]
+
+[node name="StreetLamp" parent="StreetLamps" instance=ExtResource("14_u1q03")]
+position = Vector2(-186, -161)
+
+[node name="StreetLamp3" parent="StreetLamps" instance=ExtResource("17_022ie")]
+z_index = 6
+position = Vector2(178, -161)
+
+[node name="StreetLamp4" parent="StreetLamps" instance=ExtResource("17_022ie")]
+position = Vector2(525, -161)
+
+[node name="StreetLamp5" parent="StreetLamps" instance=ExtResource("14_u1q03")]
+z_index = 6
+position = Vector2(908, -161)
+
+[node name="StreetLamp2" parent="StreetLamps" instance=ExtResource("17_022ie")]
+position = Vector2(1260, -161)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

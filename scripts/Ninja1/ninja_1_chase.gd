@@ -4,7 +4,7 @@ class_name Ninja1Chase
 @export var ninja: RigidBody2D
 @export var ninja_animation: AnimatedSprite2D
 @export var ninja_forward_raycast: RayCast2D
-@export var MAX_SPEED = randf_range(100, 120)
+@export var MAX_SPEED = randf_range(90, 130)
 @export var boofbro_raycast: RayCast2D
 
 const JUMP_IMPULSE = 650.0
