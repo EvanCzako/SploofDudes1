@@ -29,12 +29,12 @@ script = ExtResource("1_r15f3")
 [node name="ParallaxLayers" type="Node" parent="."]
 
 [node name="Sunset" type="Parallax2D" parent="ParallaxLayers"]
-scroll_scale = Vector2(0.1, 0.9)
+scroll_scale = Vector2(0.1, 0.6)
 repeat_size = Vector2(1280, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Sunset"]
 z_index = -10
-position = Vector2(338, -200)
+position = Vector2(327, -58)
 scale = Vector2(2, 2)
 texture = ExtResource("3_mxjxp")
 

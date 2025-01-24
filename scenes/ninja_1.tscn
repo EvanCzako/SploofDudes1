@@ -162,7 +162,6 @@ collision_mask = 2
 [node name="BoofBroRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, 1)
 target_position = Vector2(100, 0)
-collision_mask = 13
 
 [node name="sprite" type="Sprite2D" parent="BoofBroRaycast"]
 visible = false
