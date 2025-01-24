@@ -1,0 +1,14 @@
+Node
+CollisionShape2D
+Area2D
+RichTextLabel
+CanvasLayer
+ColorRect
+Sprite2D
+AnimatedSprite2D
+CollisionPolygon2D
+RigidBody2D
+Node2D
+AnimationPlayer
+VBoxContainer
+Button
