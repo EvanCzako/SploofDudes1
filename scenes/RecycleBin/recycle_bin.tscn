@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b6butoqkyvos6" path="res://scenes/RecycleBin/garbo_obj_2.tscn" id="4_sa4t0"]
 [ext_resource type="PackedScene" uid="uid://cxsqgx8ry2t33" path="res://scenes/RecycleBin/garbo_obj_3.tscn" id="5_q8seq"]
 
-[node name="RecycleBin" type="Node2D"]
+[node name="RecycleBin" type="Node2D" groups=["environment"]]
 z_index = 6
 
 [node name="BinBase" parent="." groups=["environment"] instance=ExtResource("1_e4mvm")]

@@ -115,8 +115,8 @@ animation = &"jump"
 position = Vector2(1, 8)
 shape = SubResource("CapsuleShape2D_8oc0k")
 
-[node name="BigGuyForwardRaycast" type="RayCast2D" parent="."]
-position = Vector2(0, 21)
+[node name="BigGuyForwardRaycast" type="RayCast2D" parent="." groups=["environment"]]
+position = Vector2(0, 25)
 target_position = Vector2(-28, 0)
 
 [node name="BoofBroRaycast" type="RayCast2D" parent="."]

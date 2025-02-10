@@ -4,11 +4,11 @@ class_name BigGuy1Chase
 @export var big_guy: RigidBody2D
 @export var big_guy_animation: AnimatedSprite2D
 @export var big_guy_raycast: RayCast2D
-@export var MAX_SPEED = randf_range(90, 130)
+@export var MAX_SPEED = randf_range(130, 170)
 @export var boofbro_raycast: RayCast2D
 
-const JUMP_IMPULSE = 650.0
-var ACC = 60000
+const JUMP_IMPULSE = 350.0
+var ACC = 30000
 var is_jumping: bool = false
 var jump_cooldown = 0.25
 var boof_bro: RigidBody2D
@@ -24,13 +24,14 @@ func Update(delta: float):
 	pass
 		
 func PhysicsUpdate(delta: float):
+
 	if !big_guy:
 		return
 		
-	if abs(big_guy.linear_velocity.y) > 1:
-		big_guy_animation.play("jump")
-	else:
-		big_guy_animation.play("chase")
+	#if abs(big_guy.linear_velocity.y) > 1:
+		#big_guy_animation.play("jump")
+	#else:
+		#big_guy_animation.play("chase")
 	
 	jump_cooldown -= delta
 	if is_jumping and abs(big_guy.linear_velocity.y) < 0.1:
