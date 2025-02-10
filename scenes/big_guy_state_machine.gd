@@ -6,10 +6,10 @@ extends Node
 #@onready var big_guy_die: Ninja1Die = $Ninja1Die
 #@onready var ninja_1_stunned: Ninja1Stunned = $Ninja1Stunned
 @onready var boofbro_raycast: RayCast2D = $"../BoofBroRaycast"
-@onready var big_guy_1: RigidBody2D = $".."
-#@onready var ninja_1_chase: Ninja1Chase = $Ninja1Chase
-#@onready var ninja_1_idle: Ninja1Idle = $Ninja1Idle
-#@onready var ninja_forward_raycast: RayCast2D = $"../NinjaForwardRaycast"
+@onready var big_guy: RigidBody2D = $".."
+@onready var big_guy_chase: BigGuy1Chase = $BigGuyChase
+@onready var big_guy_idle: BigGuy1Idle = $BigGuyIdle
+@onready var big_guy_raycast: RayCast2D = $"../BigGuyForwardRaycast"
 
 var current_state: EnemyState
 var states: Dictionary = {}
@@ -59,35 +59,34 @@ func on_child_transition(state, new_state_name):
 
 
 func process_game_logic(delta):
-	pass
 	#if health < 0 && !dead:
 		#current_state.Exit()
 		#ninja_1_die.Enter()
 		#current_state = ninja_1_die
 		#dead = true
 		#
-	#if current_state == ninja_1_chase:
-		#chase_cooldown -= delta
-		#if !can_see_boofbro or (boofbro.global_position-ninja_1.global_position).length() > 200:
-			#if chase_cooldown <= 0:
-				#current_state.Exit()
-				#ninja_1_idle.Enter()
-				#current_state = ninja_1_idle
-		#else:
-			#chase_cooldown = 3
-	#
-	#if current_state == ninja_1_idle and can_see_boofbro:
-		#var ninja_rayvec = ninja_forward_raycast.target_position - ninja_forward_raycast.position
-		#var boof_rayvec = boofbro_raycast.target_position - boofbro_raycast.position
-		#if boof_rayvec.dot(ninja_rayvec) > 0 && boof_rayvec.length() < sight_distance:
-			#current_state.Exit()
-			#ninja_1_chase.Enter()
-			#current_state = ninja_1_chase
-	#
+	if current_state == big_guy_chase:
+		chase_cooldown -= delta
+		if !can_see_boofbro or (boofbro.global_position-big_guy.global_position).length() > 200:
+			if chase_cooldown <= 0:
+				current_state.Exit()
+				big_guy_idle.Enter()
+				current_state = big_guy_idle
+		else:
+			chase_cooldown = 3
+	
+	if (current_state == big_guy_idle) and can_see_boofbro:
+		var big_guy_rayvec = big_guy_raycast.target_position - big_guy_raycast.position
+		var boof_rayvec = boofbro_raycast.target_position - boofbro_raycast.position
+		if boof_rayvec.dot(big_guy_rayvec) > 0 && boof_rayvec.length() < sight_distance:
+			current_state.Exit()
+			big_guy_chase.Enter()
+			current_state = big_guy_chase
+	
 func process_physics_logic(delta):
 	boofbro_raycast.target_position = (boofbro.global_position + Vector2(0,-30)) - \
-	(big_guy_1.global_position + Vector2(0,-5))
-	boofbro_raycast.global_position = big_guy_1.global_position
+	(big_guy.global_position + Vector2(0,-5))
+	boofbro_raycast.global_position = big_guy.global_position
 	
 	if boofbro_raycast.get_collider() == boofbro:
 		can_see_boofbro = true

@@ -44,8 +44,9 @@ func PhysicsUpdate(delta: float):
 				jump_cooldown = 0.5
 	
 	if ninja_forward_raycast.is_colliding() and !is_jumping and jump_cooldown < 0:
-		is_jumping = true
-		ninja.apply_central_impulse(Vector2(0,-JUMP_IMPULSE))
+		if "MapCollision" in ninja_forward_raycast.get_collider().get_groups() or "environment" in ninja_forward_raycast.get_collider().get_groups():
+			is_jumping = true
+			ninja.apply_central_impulse(Vector2(0,-JUMP_IMPULSE))
 	
 	
 	shuriken_time -= delta
