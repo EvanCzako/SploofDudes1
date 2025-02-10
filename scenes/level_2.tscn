@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3e7qews5y0ic"]
+[gd_scene load_steps=14 format=3 uid="uid://b3e7qews5y0ic"]
 
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_7kt26"]
 [ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_qttdx"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="4_lsuu5"]
 [ext_resource type="Texture2D" uid="uid://d2msf6g33anuh" path="res://assets/sprites/SunsetLayer1/l2_sunset11.png" id="5_io8ms"]
 [ext_resource type="Script" path="res://scripts/killzone.gd" id="6_avyox"]
+[ext_resource type="PackedScene" uid="uid://b2ej8p8vbv4fa" path="res://scenes/RecycleBin/recycle_bin.tscn" id="7_rblei"]
+[ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="8_6vrfv"]
 [ext_resource type="Texture2D" uid="uid://dox07xgkkrho6" path="res://assets/sprites/MapChunks/Layer 1_sprite_1.png" id="9_atw65"]
+[ext_resource type="PackedScene" uid="uid://b6iax4g0xw2qm" path="res://scenes/big_guy_1.tscn" id="10_ab0pc"]
 [ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="10_jjovq"]
 [ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_vpjt3"]
 
@@ -69,6 +72,20 @@ wait_time = 2.0
 
 [node name="EnvObs" type="Node" parent="."]
 
+[node name="RecycleBin" parent="EnvObs" instance=ExtResource("7_rblei")]
+position = Vector2(91, -62)
+
+[node name="RecycleBin2" parent="EnvObs" instance=ExtResource("7_rblei")]
+position = Vector2(137, -62)
+
+[node name="Crate1" parent="EnvObs" instance=ExtResource("8_6vrfv")]
+position = Vector2(60, -95)
+rotation = 1.5708
+
+[node name="Crate2" parent="EnvObs" instance=ExtResource("8_6vrfv")]
+position = Vector2(270, -98)
+rotation = 1.5708
+
 [node name="MapCollisionMasks" type="Node" parent="." groups=["MapCollision"]]
 
 [node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
@@ -89,6 +106,11 @@ position = Vector2(502, -230)
 texture = ExtResource("10_jjovq")
 
 [node name="Ninjas" type="Node" parent="."]
+
+[node name="BigGuys" type="Node" parent="."]
+
+[node name="BigGuy1" parent="BigGuys" instance=ExtResource("10_ab0pc")]
+position = Vector2(200, -105)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

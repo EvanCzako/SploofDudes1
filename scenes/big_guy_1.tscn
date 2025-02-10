@@ -1,0 +1,104 @@
+[gd_scene load_steps=15 format=3 uid="uid://b6iax4g0xw2qm"]
+
+[ext_resource type="Script" path="res://scenes/big_guy_state_machine.gd" id="1_gcqx1"]
+[ext_resource type="Texture2D" uid="uid://00s30jna5jgt" path="res://assets/sprites/BigGuy1/sprite_02.png" id="1_ourwh"]
+[ext_resource type="Script" path="res://scripts/bigguy1/big_guy_idle.gd" id="2_macyv"]
+[ext_resource type="Texture2D" uid="uid://54q026k23ak1" path="res://assets/sprites/BigGuy1/sprite_03.png" id="2_w331p"]
+[ext_resource type="Texture2D" uid="uid://cdrcn5qa2ivs2" path="res://assets/sprites/BigGuy1/sprite_04.png" id="3_wwudu"]
+[ext_resource type="Texture2D" uid="uid://cco76svxs2po2" path="res://assets/sprites/BigGuy1/sprite_05.png" id="4_0tm14"]
+[ext_resource type="Texture2D" uid="uid://dxbu0oar7u0br" path="res://assets/sprites/BigGuy1/sprite_06.png" id="5_knah1"]
+[ext_resource type="Texture2D" uid="uid://b2x671utdyvrk" path="res://assets/sprites/BigGuy1/sprite_07.png" id="6_swk1n"]
+[ext_resource type="Texture2D" uid="uid://i2p4gu004k0h" path="res://assets/sprites/BigGuy1/sprite_08.png" id="7_k60qw"]
+[ext_resource type="Texture2D" uid="uid://ci5fsqix2gfq8" path="res://assets/sprites/BigGuy1/sprite_09.png" id="8_0jic0"]
+[ext_resource type="Texture2D" uid="uid://cqhc5xtpsdhk8" path="res://assets/sprites/BigGuy1/sprite_10.png" id="10_c8uwe"]
+[ext_resource type="Texture2D" uid="uid://d35kjnwxnmmce" path="res://assets/sprites/BigGuy1/sprite_01.png" id="11_c540c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ohft7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w331p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wwudu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0tm14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_knah1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_swk1n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_k60qw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0jic0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c8uwe")
+}],
+"loop": true,
+"name": &"chase",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_c540c")
+}],
+"loop": true,
+"name": &"idle_still",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_c540c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ourwh")
+}],
+"loop": true,
+"name": &"idle_walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8oc0k"]
+radius = 7.0
+height = 48.0
+
+[node name="BigGuy1" type="RigidBody2D"]
+z_index = 4
+collision_layer = 2
+collision_mask = 2
+lock_rotation = true
+
+[node name="BigGuyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_gcqx1")
+initial_state = NodePath("BigGuyIdle")
+
+[node name="BigGuyIdle" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation", "boofbro_raycast", "big_guy_raycast")]
+script = ExtResource("2_macyv")
+big_guy = NodePath("../..")
+big_guy_animation = NodePath("../../AnimatedSprite2D")
+boofbro_raycast = NodePath("../../BoofBroRaycast")
+big_guy_raycast = NodePath("../../BigGuyForwardRaycast")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ohft7")
+animation = &"idle_still"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(1, 8)
+shape = SubResource("CapsuleShape2D_8oc0k")
+
+[node name="BigGuyForwardRaycast" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, 21)
+target_position = Vector2(-28, 0)
+
+[node name="BoofBroRaycast" type="RayCast2D" parent="."]
+visible = false
+target_position = Vector2(109, 0)

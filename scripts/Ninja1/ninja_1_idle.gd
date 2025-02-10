@@ -19,8 +19,6 @@ func randomize_wander():
 	
 func Enter():
 	ninja_animation.play("idle")
-	ninja.set_sleeping(true)
-	ninja.set_sleeping(false)
 	boof_bro = get_tree().get_first_node_in_group("Player")
 	randomize_wander()
 	

@@ -141,17 +141,6 @@ z_index = 7
 position = Vector2(502, -230)
 texture = ExtResource("10_mpwnm")
 
-[node name="Ninjas" type="Node" parent="."]
-
-[node name="Ninja1" parent="Ninjas" instance=ExtResource("11_4846h")]
-position = Vector2(397, -86)
-
-[node name="Ninja2" parent="Ninjas" instance=ExtResource("11_4846h")]
-position = Vector2(1189, -94)
-
-[node name="Ninja3" parent="Ninjas" instance=ExtResource("11_4846h")]
-position = Vector2(1265, -95)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Menus" parent="CanvasLayer" instance=ExtResource("12_4o8sl")]
@@ -192,6 +181,26 @@ position = Vector2(908, -161)
 
 [node name="StreetLamp2" parent="StreetLamps" instance=ExtResource("17_022ie")]
 position = Vector2(1260, -161)
+
+[node name="Ninjas" type="Node" parent="."]
+
+[node name="Ninja1" parent="Ninjas" instance=ExtResource("11_4846h")]
+position = Vector2(397, -86)
+
+[node name="Ninja2" parent="Ninjas" instance=ExtResource("11_4846h")]
+position = Vector2(1189, -94)
+
+[node name="Ninja3" parent="Ninjas" instance=ExtResource("11_4846h")]
+position = Vector2(1265, -95)
+
+[node name="Ninja4" parent="Ninjas" instance=ExtResource("11_4846h")]
+position = Vector2(1312, -86)
+
+[node name="Ninja5" parent="Ninjas" instance=ExtResource("11_4846h")]
+position = Vector2(1228, -90)
+
+[node name="Ninja6" parent="Ninjas" instance=ExtResource("11_4846h")]
+position = Vector2(1289, -93)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]

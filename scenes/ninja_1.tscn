@@ -73,8 +73,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4hai5"]
-size = Vector2(9, 30)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7bj8o"]
+radius = 5.5
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b3eia"]
 bounce = 3.0
@@ -93,11 +93,11 @@ max_contacts_reported = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p68a6")
-animation = &"attack"
+animation = &"idle"
 
 [node name="NinjaCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 1)
-shape = SubResource("RectangleShape2D_4hai5")
+shape = SubResource("CapsuleShape2D_7bj8o")
 
 [node name="NinjaStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_rcwek")
