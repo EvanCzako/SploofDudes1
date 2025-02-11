@@ -7,10 +7,10 @@ class_name BigGuy1Chase
 @export var MAX_SPEED = randf_range(130, 170)
 @export var boofbro_raycast: RayCast2D
 
-const JUMP_IMPULSE = 350.0
-var ACC = 30000
+const JUMP_IMPULSE = 750.0
+var ACC = 40000
 var is_jumping: bool = false
-var jump_cooldown = 0.25
+var jump_cooldown = 0.1
 var boof_bro: RigidBody2D
 
 var move_direction: float
@@ -38,15 +38,13 @@ func PhysicsUpdate(delta: float):
 		for body in big_guy.get_colliding_bodies():
 			if "MapCollision" in body.get_groups() or "environment" in body.get_groups():
 				is_jumping = false
-				jump_cooldown = 0.5
+				jump_cooldown = 0.1
 	
 	if big_guy_raycast.is_colliding() and !is_jumping and jump_cooldown < 0:
 		if "MapCollision" in big_guy_raycast.get_collider().get_groups() or "environment" in big_guy_raycast.get_collider().get_groups():
 			is_jumping = true
 			big_guy.apply_central_impulse(Vector2(0,-JUMP_IMPULSE))
 
-	
-	
 	var dir_to_boof_bro = sign(boof_bro.position.x - big_guy.position.x)
 	var distance_from_player = big_guy.position.distance_to(boof_bro.position)
 	big_guy_animation.flip_h = dir_to_boof_bro >= 0

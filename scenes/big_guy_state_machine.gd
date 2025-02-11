@@ -4,12 +4,12 @@ extends Node
 @export var initial_state: EnemyState
 #@onready var bounce_head: RigidBody2D = $"../BounceHead"
 #@onready var big_guy_die: Ninja1Die = $Ninja1Die
-#@onready var ninja_1_stunned: Ninja1Stunned = $Ninja1Stunned
 @onready var boofbro_raycast: RayCast2D = $"../BoofBroRaycast"
 @onready var big_guy: RigidBody2D = $".."
 @onready var big_guy_chase: BigGuy1Chase = $BigGuyChase
 @onready var big_guy_idle: BigGuy1Idle = $BigGuyIdle
 @onready var big_guy_raycast: RayCast2D = $"../BigGuyForwardRaycast"
+@onready var big_guy_stunned: BigGuy1Stunned = $BigGuyStunned
 
 var current_state: EnemyState
 var states: Dictionary = {}
@@ -94,11 +94,10 @@ func process_physics_logic(delta):
 		can_see_boofbro = false
 		
 func _on_bounce_head_body_entered(body: Node) -> void:
-	pass
 	#health -= 2
-	#current_state.Exit()
-	#ninja_1_stunned.Enter()
-	#current_state = ninja_1_stunned
+	current_state.Exit()
+	big_guy_stunned.Enter()
+	current_state = big_guy_stunned
 
 func _on_ninja_1_body_entered(body: Node) -> void:
 	pass

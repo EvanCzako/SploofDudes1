@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b6iax4g0xw2qm"]
+[gd_scene load_steps=22 format=3 uid="uid://b6iax4g0xw2qm"]
 
 [ext_resource type="Script" path="res://scenes/big_guy_state_machine.gd" id="1_gcqx1"]
 [ext_resource type="Texture2D" uid="uid://00s30jna5jgt" path="res://assets/sprites/BigGuy1/sprite_02.png" id="1_ourwh"]
@@ -7,12 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://cdrcn5qa2ivs2" path="res://assets/sprites/BigGuy1/sprite_04.png" id="3_wwudu"]
 [ext_resource type="Script" path="res://scripts/bigguy1/big_guy_chase.gd" id="3_ydkyx"]
 [ext_resource type="Texture2D" uid="uid://cco76svxs2po2" path="res://assets/sprites/BigGuy1/sprite_05.png" id="4_0tm14"]
+[ext_resource type="Script" path="res://scripts/bigguy1/big_guy_stunned.gd" id="4_ma6yg"]
 [ext_resource type="Texture2D" uid="uid://dxbu0oar7u0br" path="res://assets/sprites/BigGuy1/sprite_06.png" id="5_knah1"]
 [ext_resource type="Texture2D" uid="uid://b2x671utdyvrk" path="res://assets/sprites/BigGuy1/sprite_07.png" id="6_swk1n"]
 [ext_resource type="Texture2D" uid="uid://i2p4gu004k0h" path="res://assets/sprites/BigGuy1/sprite_08.png" id="7_k60qw"]
 [ext_resource type="Texture2D" uid="uid://ci5fsqix2gfq8" path="res://assets/sprites/BigGuy1/sprite_09.png" id="8_0jic0"]
 [ext_resource type="Texture2D" uid="uid://cqhc5xtpsdhk8" path="res://assets/sprites/BigGuy1/sprite_10.png" id="10_c8uwe"]
 [ext_resource type="Texture2D" uid="uid://d35kjnwxnmmce" path="res://assets/sprites/BigGuy1/sprite_01.png" id="11_c540c"]
+[ext_resource type="Texture2D" uid="uid://bv5x3v50inac5" path="res://assets/sprites/BigGuy1/sprite_11.png" id="14_jmnv7"]
+[ext_resource type="Texture2D" uid="uid://d35dp3wwnwalk" path="res://assets/sprites/BigGuy1/sprite_12.png" id="15_bn2do"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8fuo6"]
 friction = 0.0
@@ -74,11 +77,28 @@ animations = [{
 "loop": true,
 "name": &"jump",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_jmnv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_bn2do")
+}],
+"loop": true,
+"name": &"stunned",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8oc0k"]
 radius = 7.0
 height = 48.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kjj7q"]
+bounce = 3.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hovl2"]
+size = Vector2(14, 15)
 
 [node name="BigGuy1" type="RigidBody2D"]
 z_index = 4
@@ -107,9 +127,15 @@ big_guy_animation = NodePath("../../AnimatedSprite2D")
 big_guy_raycast = NodePath("../../BigGuyForwardRaycast")
 boofbro_raycast = NodePath("../../BoofBroRaycast")
 
+[node name="BigGuyStunned" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation")]
+script = ExtResource("4_ma6yg")
+big_guy = NodePath("../..")
+big_guy_animation = NodePath("../../AnimatedSprite2D")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ohft7")
-animation = &"jump"
+animation = &"stunned"
+frame_progress = 0.163262
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 8)
@@ -121,3 +147,21 @@ target_position = Vector2(-28, 0)
 
 [node name="BoofBroRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(109, 0)
+
+[node name="BounceHead" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_kjj7q")
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceHead"]
+position = Vector2(1, -11.5)
+shape = SubResource("RectangleShape2D_hovl2")
+one_way_collision = true
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(1, -12)
+node_a = NodePath("..")
+node_b = NodePath("../BounceHead")
+
+[connection signal="body_entered" from="BounceHead" to="BigGuyStateMachine" method="_on_bounce_head_body_entered"]
