@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b6iax4g0xw2qm"]
+[gd_scene load_steps=24 format=3 uid="uid://b6iax4g0xw2qm"]
 
 [ext_resource type="Script" path="res://scenes/big_guy_state_machine.gd" id="1_gcqx1"]
 [ext_resource type="Texture2D" uid="uid://00s30jna5jgt" path="res://assets/sprites/BigGuy1/sprite_02.png" id="1_ourwh"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cco76svxs2po2" path="res://assets/sprites/BigGuy1/sprite_05.png" id="4_0tm14"]
 [ext_resource type="Script" path="res://scripts/bigguy1/big_guy_stunned.gd" id="4_ma6yg"]
 [ext_resource type="Texture2D" uid="uid://dxbu0oar7u0br" path="res://assets/sprites/BigGuy1/sprite_06.png" id="5_knah1"]
+[ext_resource type="Script" path="res://scripts/BigGuy1/big_guy_die.gd" id="5_qe4ha"]
 [ext_resource type="Texture2D" uid="uid://b2x671utdyvrk" path="res://assets/sprites/BigGuy1/sprite_07.png" id="6_swk1n"]
 [ext_resource type="Texture2D" uid="uid://i2p4gu004k0h" path="res://assets/sprites/BigGuy1/sprite_08.png" id="7_k60qw"]
 [ext_resource type="Texture2D" uid="uid://ci5fsqix2gfq8" path="res://assets/sprites/BigGuy1/sprite_09.png" id="8_0jic0"]
@@ -100,6 +101,9 @@ bounce = 3.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hovl2"]
 size = Vector2(14, 15)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmj42"]
+size = Vector2(31, 55)
+
 [node name="BigGuy1" type="RigidBody2D"]
 z_index = 4
 collision_layer = 2
@@ -120,22 +124,27 @@ big_guy_animation = NodePath("../../AnimatedSprite2D")
 boofbro_raycast = NodePath("../../BoofBroRaycast")
 big_guy_raycast = NodePath("../../BigGuyForwardRaycast")
 
-[node name="BigGuyChase" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation", "big_guy_raycast", "boofbro_raycast")]
+[node name="BigGuyChase" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation", "big_guy_raycast", "boofbro_raycast", "boom_collision")]
 script = ExtResource("3_ydkyx")
 big_guy = NodePath("../..")
 big_guy_animation = NodePath("../../AnimatedSprite2D")
 big_guy_raycast = NodePath("../../BigGuyForwardRaycast")
 boofbro_raycast = NodePath("../../BoofBroRaycast")
+boom_collision = NodePath("../../BoomArea/BoomCollision")
 
 [node name="BigGuyStunned" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation")]
 script = ExtResource("4_ma6yg")
 big_guy = NodePath("../..")
 big_guy_animation = NodePath("../../AnimatedSprite2D")
 
+[node name="BigGuyDie" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation")]
+script = ExtResource("5_qe4ha")
+big_guy = NodePath("../..")
+big_guy_animation = NodePath("../../AnimatedSprite2D")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ohft7")
 animation = &"stunned"
-frame_progress = 0.163262
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 8)
@@ -164,4 +173,14 @@ position = Vector2(1, -12)
 node_a = NodePath("..")
 node_b = NodePath("../BounceHead")
 
+[node name="BoomArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="BoomCollision" type="CollisionShape2D" parent="BoomArea"]
+position = Vector2(-18.5, 2.5)
+shape = SubResource("RectangleShape2D_qmj42")
+
+[connection signal="body_entered" from="." to="BigGuyStateMachine" method="_on_big_guy_1_body_entered"]
 [connection signal="body_entered" from="BounceHead" to="BigGuyStateMachine" method="_on_bounce_head_body_entered"]
+[connection signal="body_entered" from="BoomArea" to="BigGuyStateMachine/BigGuyChase" method="_on_boom_area_body_entered"]
+[connection signal="body_exited" from="BoomArea" to="BigGuyStateMachine/BigGuyChase" method="_on_boom_area_body_exited"]

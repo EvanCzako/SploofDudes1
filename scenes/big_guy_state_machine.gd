@@ -2,18 +2,17 @@ extends Node
 
 @export var boofbro: RigidBody2D
 @export var initial_state: EnemyState
-#@onready var bounce_head: RigidBody2D = $"../BounceHead"
-#@onready var big_guy_die: Ninja1Die = $Ninja1Die
 @onready var boofbro_raycast: RayCast2D = $"../BoofBroRaycast"
 @onready var big_guy: RigidBody2D = $".."
 @onready var big_guy_chase: BigGuy1Chase = $BigGuyChase
 @onready var big_guy_idle: BigGuy1Idle = $BigGuyIdle
 @onready var big_guy_raycast: RayCast2D = $"../BigGuyForwardRaycast"
 @onready var big_guy_stunned: BigGuy1Stunned = $BigGuyStunned
+@onready var big_guy_die: Node = $BigGuyDie
 
 var current_state: EnemyState
 var states: Dictionary = {}
-var health = 10
+var health: float = 10
 var dead = false
 var can_see_boofbro: bool = false
 var chase_cooldown: float = 2.5
@@ -59,12 +58,12 @@ func on_child_transition(state, new_state_name):
 
 
 func process_game_logic(delta):
-	#if health < 0 && !dead:
-		#current_state.Exit()
-		#ninja_1_die.Enter()
-		#current_state = ninja_1_die
-		#dead = true
-		#
+	if health < 0 && !dead:
+		current_state.Exit()
+		big_guy_die.Enter() 
+		current_state = big_guy_die
+		dead = true
+		
 	if current_state == big_guy_chase:
 		chase_cooldown -= delta
 		if !can_see_boofbro or (boofbro.global_position-big_guy.global_position).length() > 200:
@@ -94,23 +93,16 @@ func process_physics_logic(delta):
 		can_see_boofbro = false
 		
 func _on_bounce_head_body_entered(body: Node) -> void:
-	#health -= 2
+	health -= 2
 	current_state.Exit()
 	big_guy_stunned.Enter()
 	current_state = big_guy_stunned
 
-func _on_ninja_1_body_entered(body: Node) -> void:
-	pass
-	#if "projectiles" in body.get_groups():
-		#if current_state != ninja_1_chase:
-			#current_state.Exit()
-			#ninja_1_chase.Enter()
-			#current_state = ninja_1_chase
-		#health -= 0.5
 
-func hurt_ninja_func(amount: float) -> void:
-	pass
-	#health -= amount
-	#current_state.Exit()
-	#ninja_1_stunned.Enter()
-	#current_state = ninja_1_stunned
+func _on_big_guy_1_body_entered(body: Node) -> void:
+	if "projectiles" in body.get_groups() and !dead:
+		if current_state != big_guy_chase:
+			current_state.Exit()
+			big_guy_chase.Enter()
+			current_state = big_guy_chase
+		health -= 0.5

@@ -100,15 +100,9 @@ func _on_bounce_head_body_entered(body: Node) -> void:
 	current_state = ninja_1_stunned
 
 func _on_ninja_1_body_entered(body: Node) -> void:
-	if "projectiles" in body.get_groups():
+	if "projectiles" in body.get_groups() and !dead:
 		if current_state != ninja_1_chase:
 			current_state.Exit()
 			ninja_1_chase.Enter()
 			current_state = ninja_1_chase
 		health -= 0.5
-
-func hurt_ninja_func(amount: float) -> void:
-	health -= amount
-	current_state.Exit()
-	ninja_1_stunned.Enter()
-	current_state = ninja_1_stunned
