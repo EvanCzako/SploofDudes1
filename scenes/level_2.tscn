@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://0nhrk6lplf2i" path="res://assets/sprites/SunsetLayer1/sunset_20.png" id="3_sudxa"]
 [ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="4_lsuu5"]
 [ext_resource type="Texture2D" uid="uid://d2msf6g33anuh" path="res://assets/sprites/SunsetLayer1/l2_sunset11.png" id="5_io8ms"]
+[ext_resource type="Texture2D" uid="uid://uqeb6qx83m2n" path="res://assets/sprites/MapChunks/l0_sprite_1.png" id="5_uvqpr"]
 [ext_resource type="Script" path="res://scripts/killzone.gd" id="6_avyox"]
 [ext_resource type="PackedScene" uid="uid://b2ej8p8vbv4fa" path="res://scenes/RecycleBin/recycle_bin.tscn" id="7_rblei"]
 [ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="8_6vrfv"]
-[ext_resource type="Texture2D" uid="uid://dox07xgkkrho6" path="res://assets/sprites/MapChunks/Layer 1_sprite_1.png" id="9_atw65"]
 [ext_resource type="PackedScene" uid="uid://b6iax4g0xw2qm" path="res://scenes/big_guy_1.tscn" id="10_ab0pc"]
 [ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="10_jjovq"]
 [ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_vpjt3"]
@@ -19,45 +19,6 @@ size = Vector2(4559, 84)
 [node name="Level1" type="Node2D"]
 
 [node name="HUD" parent="." instance=ExtResource("1_7kt26")]
-
-[node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_qttdx")]
-unique_name_in_owner = true
-position = Vector2(-128, -162)
-
-[node name="ParallaxLayers" type="Node" parent="."]
-
-[node name="Sunset" type="Parallax2D" parent="ParallaxLayers"]
-scroll_scale = Vector2(0.1, 0.9)
-repeat_size = Vector2(1280, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Sunset"]
-z_index = -10
-position = Vector2(338, -200)
-scale = Vector2(2, 2)
-texture = ExtResource("3_sudxa")
-
-[node name="Hills" type="Parallax2D" parent="ParallaxLayers"]
-scroll_scale = Vector2(0.4, 0.8)
-repeat_size = Vector2(1280, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Hills"]
-modulate = Color(0.529412, 0, 1, 0.752941)
-z_index = -10
-position = Vector2(305, -200)
-scale = Vector2(2, 3)
-texture = ExtResource("4_lsuu5")
-
-[node name="Clouds" type="Parallax2D" parent="ParallaxLayers"]
-scroll_scale = Vector2(0.2, 0.8)
-repeat_size = Vector2(1280, 0)
-autoscroll = Vector2(15, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Clouds"]
-modulate = Color(1, 0.901961, 1, 0.670588)
-z_index = -10
-position = Vector2(182, 0)
-scale = Vector2(2, 2)
-texture = ExtResource("5_io8ms")
 
 [node name="Killzone" type="Area2D" parent="."]
 collision_mask = 3
@@ -98,7 +59,7 @@ polygon = PackedVector2Array(250, 230, 250, -761, 374, -768, 375, -134, 416, -13
 
 [node name="Sprite2D" type="Sprite2D" parent="MapCollisionMasks/Area2D2"]
 position = Vector2(502, -230)
-texture = ExtResource("9_atw65")
+texture = ExtResource("5_uvqpr")
 
 [node name="Sprite2D2" type="Sprite2D" parent="MapCollisionMasks/Area2D2"]
 z_index = 7
@@ -106,6 +67,45 @@ position = Vector2(502, -230)
 texture = ExtResource("10_jjovq")
 
 [node name="Ninjas" type="Node" parent="."]
+
+[node name="ParallaxLayers" type="Node" parent="."]
+
+[node name="Sunset" type="Parallax2D" parent="ParallaxLayers"]
+scroll_scale = Vector2(0.1, 0.9)
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Sunset"]
+z_index = -10
+position = Vector2(338, -200)
+scale = Vector2(2, 2)
+texture = ExtResource("3_sudxa")
+
+[node name="Hills" type="Parallax2D" parent="ParallaxLayers"]
+scroll_scale = Vector2(0.4, 0.8)
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Hills"]
+modulate = Color(0.529412, 0, 1, 0.752941)
+z_index = -10
+position = Vector2(305, -200)
+scale = Vector2(2, 3)
+texture = ExtResource("4_lsuu5")
+
+[node name="Clouds" type="Parallax2D" parent="ParallaxLayers"]
+scroll_scale = Vector2(0.2, 0.8)
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(15, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Clouds"]
+modulate = Color(1, 0.901961, 1, 0.670588)
+z_index = -10
+position = Vector2(182, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("5_io8ms")
+
+[node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_qttdx")]
+unique_name_in_owner = true
+position = Vector2(-131, -66)
 
 [node name="BigGuys" type="Node" parent="."]
 
