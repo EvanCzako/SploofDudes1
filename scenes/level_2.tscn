@@ -1,14 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3e7qews5y0ic"]
+[gd_scene load_steps=17 format=3 uid="uid://b3e7qews5y0ic"]
 
+[ext_resource type="Script" path="res://scenes/level_2.gd" id="1_0vf13"]
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_7kt26"]
 [ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_qttdx"]
 [ext_resource type="Texture2D" uid="uid://0nhrk6lplf2i" path="res://assets/sprites/SunsetLayer1/sunset_20.png" id="3_sudxa"]
 [ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="4_lsuu5"]
 [ext_resource type="Texture2D" uid="uid://d2msf6g33anuh" path="res://assets/sprites/SunsetLayer1/l2_sunset11.png" id="5_io8ms"]
+[ext_resource type="PackedScene" uid="uid://bsv5hesajaglo" path="res://scenes/gas_can.tscn" id="5_jhygp"]
 [ext_resource type="Texture2D" uid="uid://uqeb6qx83m2n" path="res://assets/sprites/MapChunks/l0_sprite_1.png" id="5_uvqpr"]
 [ext_resource type="Script" path="res://scripts/killzone.gd" id="6_avyox"]
 [ext_resource type="PackedScene" uid="uid://b2ej8p8vbv4fa" path="res://scenes/RecycleBin/recycle_bin.tscn" id="7_rblei"]
 [ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="8_6vrfv"]
+[ext_resource type="PackedScene" uid="uid://b3575872h55bb" path="res://scenes/ninja_1.tscn" id="8_qw1ax"]
 [ext_resource type="PackedScene" uid="uid://b6iax4g0xw2qm" path="res://scenes/big_guy_1.tscn" id="10_ab0pc"]
 [ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="10_jjovq"]
 [ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_vpjt3"]
@@ -17,6 +20,7 @@
 size = Vector2(4559, 84)
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_0vf13")
 
 [node name="HUD" parent="." instance=ExtResource("1_7kt26")]
 
@@ -47,6 +51,27 @@ rotation = 1.5708
 position = Vector2(270, -98)
 rotation = 1.5708
 
+[node name="GasCan" parent="EnvObs" instance=ExtResource("5_jhygp")]
+position = Vector2(240, -64)
+
+[node name="Crate3" parent="EnvObs" instance=ExtResource("8_6vrfv")]
+position = Vector2(845, -72)
+
+[node name="GasCan2" parent="EnvObs" instance=ExtResource("5_jhygp")]
+position = Vector2(907, -67)
+
+[node name="GasCan3" parent="EnvObs" instance=ExtResource("5_jhygp")]
+position = Vector2(942, -66)
+
+[node name="Crate4" parent="EnvObs" instance=ExtResource("8_6vrfv")]
+position = Vector2(838, -90)
+
+[node name="Crate5" parent="EnvObs" instance=ExtResource("8_6vrfv")]
+position = Vector2(841, -107)
+
+[node name="Crate6" parent="EnvObs" instance=ExtResource("8_6vrfv")]
+position = Vector2(1131, -73)
+
 [node name="MapCollisionMasks" type="Node" parent="." groups=["MapCollision"]]
 
 [node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
@@ -67,6 +92,12 @@ position = Vector2(502, -230)
 texture = ExtResource("10_jjovq")
 
 [node name="Ninjas" type="Node" parent="."]
+
+[node name="Ninja1" parent="Ninjas" instance=ExtResource("8_qw1ax")]
+position = Vector2(1045, -82)
+
+[node name="Ninja2" parent="Ninjas" instance=ExtResource("8_qw1ax")]
+position = Vector2(999, -81)
 
 [node name="ParallaxLayers" type="Node" parent="."]
 
@@ -110,7 +141,7 @@ position = Vector2(-131, -66)
 [node name="BigGuys" type="Node" parent="."]
 
 [node name="BigGuy1" parent="BigGuys" instance=ExtResource("10_ab0pc")]
-position = Vector2(200, -105)
+position = Vector2(189, -95)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -93,6 +93,9 @@ func process_physics_logic(delta):
 	else:
 		can_see_boofbro = false
 		
+func hurt_ninja_func(amount: float) -> void:
+	health -= amount
+		
 func _on_bounce_head_body_entered(body: Node) -> void:
 	health -= 2
 	current_state.Exit()

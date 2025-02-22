@@ -63,7 +63,7 @@ func handle_explode(delta: float):
 				var boom_impulse = (body.global_position-global_position).normalized() * explosion_impulse
 				body.apply_central_impulse(boom_impulse)
 				boomed_bodies.append(body)
-				GameManager.hurt_ninja(body, 5)
+				GameManager.hurt_enemy(body, 11)
 			elif "environment" in body.get_groups():
 				var boom_impulse = (body.global_position-global_position).normalized() * explosion_impulse
 				body.apply_central_impulse(boom_impulse)

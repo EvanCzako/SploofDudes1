@@ -56,7 +56,6 @@ func on_child_transition(state, new_state_name):
 	new_state.Enter()
 	current_state = new_state
 
-
 func process_game_logic(delta):
 	if health < 0 && !dead:
 		current_state.Exit()
@@ -91,6 +90,9 @@ func process_physics_logic(delta):
 		can_see_boofbro = true
 	else:
 		can_see_boofbro = false
+		
+func hurt_bigguy_func(amount: float) -> void:
+	health -= amount
 		
 func _on_bounce_head_body_entered(body: Node) -> void:
 	health -= 2

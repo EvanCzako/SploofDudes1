@@ -32,6 +32,8 @@ projectiles=""
 enemies=""
 environment=""
 explodables=""
+ninjas=""
+bigguys=""
 
 [input]
 

@@ -86,11 +86,14 @@ func decrement_boofbro_health(amount: float):
 		BOOFBRO.set_collision_mask_value(3, false)
 		player_info_live["dying"] = true
 
-func hurt_ninja(ninja: RigidBody2D, amount: float) -> void:
-	if !ninja:
+func hurt_enemy(enemy: RigidBody2D, amount: float) -> void:
+	if !enemy:
 		return
 
-	ninja.get_node("NinjaStateMachine").hurt_ninja_func(5)
+	if "ninjas" in enemy.get_groups():
+		enemy.get_node("NinjaStateMachine").hurt_ninja_func(amount)
+	elif "bigguys" in enemy.get_groups():
+		enemy.get_node("BigGuyStateMachine").hurt_bigguy_func(amount)
 
 func add_collision_exceptions(enemyNodes: Array[Node]):
 	for enemy in enemyNodes:

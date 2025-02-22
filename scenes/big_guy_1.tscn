@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://scenes/big_guy_state_machine.gd" id="1_gcqx1"]
 [ext_resource type="Texture2D" uid="uid://00s30jna5jgt" path="res://assets/sprites/BigGuy1/sprite_02.png" id="1_ourwh"]
-[ext_resource type="Script" path="res://scripts/bigguy1/big_guy_idle.gd" id="2_macyv"]
+[ext_resource type="Script" path="res://scripts/BigGuy1/big_guy_idle.gd" id="2_jdvh3"]
 [ext_resource type="Texture2D" uid="uid://54q026k23ak1" path="res://assets/sprites/BigGuy1/sprite_03.png" id="2_w331p"]
+[ext_resource type="Script" path="res://scripts/BigGuy1/big_guy_chase.gd" id="3_eltdn"]
 [ext_resource type="Texture2D" uid="uid://cdrcn5qa2ivs2" path="res://assets/sprites/BigGuy1/sprite_04.png" id="3_wwudu"]
-[ext_resource type="Script" path="res://scripts/bigguy1/big_guy_chase.gd" id="3_ydkyx"]
 [ext_resource type="Texture2D" uid="uid://cco76svxs2po2" path="res://assets/sprites/BigGuy1/sprite_05.png" id="4_0tm14"]
-[ext_resource type="Script" path="res://scripts/bigguy1/big_guy_stunned.gd" id="4_ma6yg"]
+[ext_resource type="Script" path="res://scripts/BigGuy1/big_guy_stunned.gd" id="4_krhoj"]
 [ext_resource type="Texture2D" uid="uid://dxbu0oar7u0br" path="res://assets/sprites/BigGuy1/sprite_06.png" id="5_knah1"]
 [ext_resource type="Script" path="res://scripts/BigGuy1/big_guy_die.gd" id="5_qe4ha"]
 [ext_resource type="Texture2D" uid="uid://b2x671utdyvrk" path="res://assets/sprites/BigGuy1/sprite_07.png" id="6_swk1n"]
@@ -104,7 +104,7 @@ size = Vector2(14, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmj42"]
 size = Vector2(31, 55)
 
-[node name="BigGuy1" type="RigidBody2D"]
+[node name="BigGuy1" type="RigidBody2D" groups=["bigguys", "enemies"]]
 z_index = 4
 collision_layer = 2
 collision_mask = 2
@@ -118,22 +118,22 @@ script = ExtResource("1_gcqx1")
 initial_state = NodePath("BigGuyIdle")
 
 [node name="BigGuyIdle" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation", "boofbro_raycast", "big_guy_raycast")]
-script = ExtResource("2_macyv")
+script = ExtResource("2_jdvh3")
 big_guy = NodePath("../..")
 big_guy_animation = NodePath("../../AnimatedSprite2D")
 boofbro_raycast = NodePath("../../BoofBroRaycast")
 big_guy_raycast = NodePath("../../BigGuyForwardRaycast")
 
 [node name="BigGuyChase" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation", "big_guy_raycast", "boofbro_raycast", "boom_collision")]
-script = ExtResource("3_ydkyx")
+script = ExtResource("3_eltdn")
 big_guy = NodePath("../..")
 big_guy_animation = NodePath("../../AnimatedSprite2D")
 big_guy_raycast = NodePath("../../BigGuyForwardRaycast")
 boofbro_raycast = NodePath("../../BoofBroRaycast")
 boom_collision = NodePath("../../BoomArea/BoomCollision")
 
-[node name="BigGuyStunned" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation")]
-script = ExtResource("4_ma6yg")
+[node name="BigGuyStunned" type="Node" parent="BigGuyStateMachine" node_paths=PackedStringArray("big_guy", "big_guy_animation") groups=["bigguys", "enemies"]]
+script = ExtResource("4_krhoj")
 big_guy = NodePath("../..")
 big_guy_animation = NodePath("../../AnimatedSprite2D")
 
