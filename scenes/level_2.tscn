@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3e7qews5y0ic"]
+[gd_scene load_steps=20 format=3 uid="uid://b3e7qews5y0ic"]
 
-[ext_resource type="Script" path="res://scenes/level_2.gd" id="1_0vf13"]
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_7kt26"]
+[ext_resource type="Script" path="res://scripts/level_2.gd" id="1_mcfg4"]
 [ext_resource type="PackedScene" uid="uid://bpkrkjwggjcg4" path="res://scenes/boof_bro.tscn" id="2_qttdx"]
 [ext_resource type="Texture2D" uid="uid://0nhrk6lplf2i" path="res://assets/sprites/SunsetLayer1/sunset_20.png" id="3_sudxa"]
 [ext_resource type="Texture2D" uid="uid://ba74b4gv7mgba" path="res://assets/sprites/SunsetLayer1/l1_sunset11.png" id="4_lsuu5"]
@@ -15,12 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://b6iax4g0xw2qm" path="res://scenes/big_guy_1.tscn" id="10_ab0pc"]
 [ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="10_jjovq"]
 [ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_vpjt3"]
+[ext_resource type="PackedScene" uid="uid://dn5l3jct4wyjs" path="res://scenes/sign_1.tscn" id="15_e6gfs"]
+[ext_resource type="PackedScene" uid="uid://7dff4xtqswft" path="res://scenes/street_lamp_flicker.tscn" id="17_naka5"]
+[ext_resource type="PackedScene" uid="uid://bdcu77upcisqw" path="res://scenes/street_lamp_no_flicker.tscn" id="18_j86w6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c70t"]
 size = Vector2(4559, 84)
 
-[node name="Level1" type="Node2D"]
-script = ExtResource("1_0vf13")
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_mcfg4")
 
 [node name="HUD" parent="." instance=ExtResource("1_7kt26")]
 
@@ -38,39 +41,39 @@ wait_time = 2.0
 [node name="EnvObs" type="Node" parent="."]
 
 [node name="RecycleBin" parent="EnvObs" instance=ExtResource("7_rblei")]
-position = Vector2(91, -62)
+position = Vector2(889, -61)
 
 [node name="RecycleBin2" parent="EnvObs" instance=ExtResource("7_rblei")]
-position = Vector2(137, -62)
+position = Vector2(935, -61)
 
 [node name="Crate1" parent="EnvObs" instance=ExtResource("8_6vrfv")]
-position = Vector2(60, -95)
+position = Vector2(858, -94)
 rotation = 1.5708
 
 [node name="Crate2" parent="EnvObs" instance=ExtResource("8_6vrfv")]
-position = Vector2(270, -98)
+position = Vector2(1068, -97)
 rotation = 1.5708
 
 [node name="GasCan" parent="EnvObs" instance=ExtResource("5_jhygp")]
-position = Vector2(240, -64)
+position = Vector2(1038, -63)
 
 [node name="Crate3" parent="EnvObs" instance=ExtResource("8_6vrfv")]
-position = Vector2(845, -72)
+position = Vector2(53, -68)
 
 [node name="GasCan2" parent="EnvObs" instance=ExtResource("5_jhygp")]
-position = Vector2(907, -67)
+position = Vector2(115, -63)
 
 [node name="GasCan3" parent="EnvObs" instance=ExtResource("5_jhygp")]
-position = Vector2(942, -66)
+position = Vector2(150, -62)
 
 [node name="Crate4" parent="EnvObs" instance=ExtResource("8_6vrfv")]
-position = Vector2(838, -90)
+position = Vector2(46, -86)
 
 [node name="Crate5" parent="EnvObs" instance=ExtResource("8_6vrfv")]
-position = Vector2(841, -107)
+position = Vector2(49, -103)
 
 [node name="Crate6" parent="EnvObs" instance=ExtResource("8_6vrfv")]
-position = Vector2(1131, -73)
+position = Vector2(339, -69)
 
 [node name="MapCollisionMasks" type="Node" parent="." groups=["MapCollision"]]
 
@@ -94,10 +97,10 @@ texture = ExtResource("10_jjovq")
 [node name="Ninjas" type="Node" parent="."]
 
 [node name="Ninja1" parent="Ninjas" instance=ExtResource("8_qw1ax")]
-position = Vector2(1045, -82)
+position = Vector2(253, -78)
 
 [node name="Ninja2" parent="Ninjas" instance=ExtResource("8_qw1ax")]
-position = Vector2(999, -81)
+position = Vector2(207, -77)
 
 [node name="ParallaxLayers" type="Node" parent="."]
 
@@ -138,14 +141,45 @@ texture = ExtResource("5_io8ms")
 unique_name_in_owner = true
 position = Vector2(-131, -66)
 
+[node name="Sign1" parent="." instance=ExtResource("15_e6gfs")]
+position = Vector2(-328, -113)
+sign_text = "420 Boof Dr"
+
+[node name="Sign2" parent="." instance=ExtResource("15_e6gfs")]
+position = Vector2(814, -77)
+sign_text = "Idk... those guys are pretty jacked, fam."
+
 [node name="BigGuys" type="Node" parent="."]
 
 [node name="BigGuy1" parent="BigGuys" instance=ExtResource("10_ab0pc")]
-position = Vector2(189, -95)
+position = Vector2(987, -94)
+
+[node name="BigGuy2" parent="BigGuys" instance=ExtResource("10_ab0pc")]
+position = Vector2(975, -100)
+
+[node name="Crate1" parent="BigGuys" instance=ExtResource("8_6vrfv")]
+position = Vector2(837, -94)
+rotation = 1.5708
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Menus" parent="CanvasLayer" instance=ExtResource("12_vpjt3")]
+
+[node name="StreetLamps" type="Node" parent="."]
+
+[node name="StreetLamp" parent="StreetLamps" instance=ExtResource("17_naka5")]
+position = Vector2(-178, -161)
+
+[node name="StreetLamp2" parent="StreetLamps" instance=ExtResource("18_j86w6")]
+z_index = 6
+position = Vector2(428, -161)
+
+[node name="StreetLamp3" parent="StreetLamps" instance=ExtResource("17_naka5")]
+position = Vector2(655, -161)
+
+[node name="StreetLamp4" parent="StreetLamps" instance=ExtResource("18_j86w6")]
+z_index = 6
+position = Vector2(1199, -161)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]
