@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b3e7qews5y0ic"]
+[gd_scene load_steps=27 format=3 uid="uid://b3e7qews5y0ic"]
 
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_7kt26"]
 [ext_resource type="Script" path="res://scripts/level_2.gd" id="1_mcfg4"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b2ej8p8vbv4fa" path="res://scenes/RecycleBin/recycle_bin.tscn" id="7_rblei"]
 [ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="8_6vrfv"]
 [ext_resource type="PackedScene" uid="uid://b3575872h55bb" path="res://scenes/ninja_1.tscn" id="8_qw1ax"]
+[ext_resource type="PackedScene" uid="uid://dn27ivcij06a2" path="res://scenes/elevator_1.tscn" id="9_3hena"]
 [ext_resource type="PackedScene" uid="uid://b6iax4g0xw2qm" path="res://scenes/big_guy_1.tscn" id="10_ab0pc"]
 [ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="10_jjovq"]
 [ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_vpjt3"]
@@ -21,6 +22,82 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c70t"]
 size = Vector2(4559, 84)
+
+[sub_resource type="Animation" id="Animation_nj3ud"]
+resource_name = "ElevatorMove"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1449, -269), Vector2(1446, -433)]
+}
+
+[sub_resource type="Animation" id="Animation_go0cc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1390, -64)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5050l"]
+_data = {
+"ElevatorMove": SubResource("Animation_nj3ud"),
+"RESET": SubResource("Animation_go0cc")
+}
+
+[sub_resource type="Animation" id="Animation_kvdym"]
+resource_name = "ElevatorMove"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1391, -246), Vector2(1391, -65)]
+}
+
+[sub_resource type="Animation" id="Animation_a6ff6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1391, -246)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmudi"]
+_data = {
+"ElevatorMove": SubResource("Animation_kvdym"),
+"RESET": SubResource("Animation_a6ff6")
+}
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_mcfg4")
@@ -83,7 +160,10 @@ collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2" groups=["MapCollision"]]
 position = Vector2(-745, 39)
-polygon = PackedVector2Array(250, 230, 250, -761, 374, -768, 375, -134, 416, -134, 465, -100, 2247, -100, 2245, 173, 954, 209)
+polygon = PackedVector2Array(250, 230, 250, -761, 374, -768, 375, -134, 416, -134, 465, -100, 1932, -100, 2117.77, -100, 2217, -100, 2217, -169, 2169, -169, 2169, -294, 2172.96, -298, 2218, -298, 2218, -456, 2218, -596, 2018.25, -596, 1916, -551, 1833, -551, 1833, -574, 1907, -574, 2018, -628, 2215, -627, 2215, -714, 1938, -714, 1932, -720.23, 1932, -737, 2239, -737, 2239, -100, 2247, -100, 2245, 173, 954, 209)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2"]
+polygon = PackedVector2Array(898, -588, 1119, -444, 1337, -444, 1337, -487, 1340, -490, 1360, -490, 1364, -486, 1364, -445, 1412, -445, 1413, -444, 1413, -415, 1374, -415, 1336, -415, 1211, -415, 1211, -259, 1353, -259, 1356, -256, 1356, -143, 1352, -139, 1187, -139, 1187, -415, 969, -415, 936, -415, 936, -442, 808, -574, 808, -588)
 
 [node name="Sprite2D" type="Sprite2D" parent="MapCollisionMasks/Area2D2"]
 position = Vector2(502, -230)
@@ -137,10 +217,6 @@ position = Vector2(182, 0)
 scale = Vector2(2, 2)
 texture = ExtResource("5_io8ms")
 
-[node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_qttdx")]
-unique_name_in_owner = true
-position = Vector2(-131, -66)
-
 [node name="Sign1" parent="." instance=ExtResource("15_e6gfs")]
 position = Vector2(-328, -113)
 sign_text = "420 Boof Dr"
@@ -179,7 +255,33 @@ position = Vector2(655, -161)
 
 [node name="StreetLamp4" parent="StreetLamps" instance=ExtResource("18_j86w6")]
 z_index = 6
-position = Vector2(1199, -161)
+position = Vector2(1148, -161)
+
+[node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_qttdx")]
+unique_name_in_owner = true
+position = Vector2(1325, -80)
+
+[node name="Elevators" type="Node" parent="."]
+
+[node name="Elevator1" parent="Elevators" instance=ExtResource("9_3hena")]
+position = Vector2(1390, -64)
+scale = Vector2(0.7, 0.7)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Elevators/Elevator1"]
+libraries = {
+"": SubResource("AnimationLibrary_5050l")
+}
+autoplay = "ElevatorMove"
+
+[node name="Elevator2" parent="Elevators" instance=ExtResource("9_3hena")]
+position = Vector2(1391, -246)
+scale = Vector2(0.7, 0.7)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Elevators/Elevator2"]
+libraries = {
+"": SubResource("AnimationLibrary_xmudi")
+}
+autoplay = "ElevatorMove"
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]
