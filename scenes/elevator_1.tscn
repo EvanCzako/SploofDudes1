@@ -1,14 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://dn27ivcij06a2"]
 
-[ext_resource type="Texture2D" uid="uid://dmgjgx1w804pm" path="res://assets/sprites/Env/crate_1.png" id="1_6oscw"]
+[ext_resource type="Texture2D" uid="uid://cla4cve3oin21" path="res://assets/sprites/Env/platform10.png" id="1_lfc07"]
 
 [node name="Elevator1" type="AnimatableBody2D"]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-30, -16, 30, -16, 32, -14, 32, -2, 30, 0, -30, 0, -32, -2, -32, -14)
+polygon = PackedVector2Array(-31, -19, 31, -19, 35, -15, 35, 0, 31, 4, -31, 4, -35, 0, -35, -15)
 one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_6oscw")
+position = Vector2(0, -7)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_lfc07")
