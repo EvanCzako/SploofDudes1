@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwby6fgpkrel6"]
+
+[ext_resource type="Texture2D" uid="uid://yywmq8y6r0w6" path="res://assets/sprites/BoofBro1/heart.png" id="1_psn8t"]
+[ext_resource type="Script" path="res://scripts/healthup.gd" id="2_eoxyo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e5t3g"]
+radius = 21.0
+
+[sub_resource type="Animation" id="Animation_faujs"]
+resource_name = "flash"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.199907),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.545098, 0.576471, 0.556863, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cogyv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.784314, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q7lmh"]
+_data = {
+"RESET": SubResource("Animation_cogyv"),
+"flash": SubResource("Animation_faujs")
+}
+
+[node name="HealthUp" type="Sprite2D"]
+modulate = Color(0.784314, 1, 1, 1)
+z_index = 7
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_psn8t")
+script = ExtResource("2_eoxyo")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+scale = Vector2(1, 1)
+shape = SubResource("CircleShape2D_e5t3g")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+collision_layer = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_q7lmh")
+}
+autoplay = "flash"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

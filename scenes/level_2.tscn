@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b3e7qews5y0ic"]
+[gd_scene load_steps=28 format=3 uid="uid://b3e7qews5y0ic"]
 
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_7kt26"]
 [ext_resource type="Script" path="res://scripts/level_2.gd" id="1_mcfg4"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dn5l3jct4wyjs" path="res://scenes/sign_1.tscn" id="15_e6gfs"]
 [ext_resource type="PackedScene" uid="uid://7dff4xtqswft" path="res://scenes/street_lamp_flicker.tscn" id="17_naka5"]
 [ext_resource type="PackedScene" uid="uid://bdcu77upcisqw" path="res://scenes/street_lamp_no_flicker.tscn" id="18_j86w6"]
+[ext_resource type="PackedScene" uid="uid://cwby6fgpkrel6" path="res://scenes/PowerUps/health_up.tscn" id="20_wr05m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c70t"]
 size = Vector2(4559, 84)
@@ -152,6 +153,9 @@ position = Vector2(49, -103)
 [node name="Crate6" parent="EnvObs" instance=ExtResource("8_6vrfv")]
 position = Vector2(339, -69)
 
+[node name="GasCan4" parent="EnvObs" instance=ExtResource("5_jhygp")]
+position = Vector2(1131, -447)
+
 [node name="MapCollisionMasks" type="Node" parent="." groups=["MapCollision"]]
 
 [node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
@@ -189,7 +193,7 @@ position = Vector2(1219, -465)
 position = Vector2(1266, -465)
 
 [node name="Ninja5" parent="Ninjas" instance=ExtResource("8_qw1ax")]
-position = Vector2(1160, -466)
+position = Vector2(1186, -465)
 
 [node name="ParallaxLayers" type="Node" parent="."]
 
@@ -295,6 +299,12 @@ libraries = {
 "": SubResource("AnimationLibrary_xmudi")
 }
 autoplay = "ElevatorMove"
+
+[node name="RecycleBin" parent="." instance=ExtResource("7_rblei")]
+position = Vector2(934, -527)
+
+[node name="HealthUp" parent="." instance=ExtResource("20_wr05m")]
+position = Vector2(1162, -122)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]
