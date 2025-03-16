@@ -8,6 +8,7 @@ var BOOFBRO: RigidBody2D
 @export var menu_info: Dictionary = {
 	"active_menu": null
 }
+@export var checkpoint_reached: bool = false
 
 func reset_inits():
 	Engine.time_scale = 1

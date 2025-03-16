@@ -276,7 +276,7 @@ position = Vector2(1148, -161)
 
 [node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_qttdx")]
 unique_name_in_owner = true
-position = Vector2(-239, -192)
+position = Vector2(-213, -126)
 
 [node name="Elevators" type="Node" parent="."]
 

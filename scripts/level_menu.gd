@@ -26,6 +26,7 @@ func _on_map_1_button_pressed() -> void:
 	GameManager.reset_inits()
 	get_tree().paused = false
 	GameManager.menu_info["active_menu"] = null
+	GameManager.checkpoint_reached = false
 	get_tree().change_scene_to_file("res://scenes/level_1.tscn")
 
 
@@ -33,4 +34,5 @@ func _on_map_2_button_pressed() -> void:
 	GameManager.reset_inits()
 	get_tree().paused = false
 	GameManager.menu_info["active_menu"] = null
+	GameManager.checkpoint_reached = false
 	get_tree().change_scene_to_file("res://scenes/level_2.tscn")

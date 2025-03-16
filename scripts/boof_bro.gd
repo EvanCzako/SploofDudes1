@@ -4,15 +4,23 @@ signal MuzzleBlocked
 const ACC = 50000.0
 const MAX_SPEED = 150
 const JUMP_IMPULSE = 400.0
-@onready var animated_sprite_player = $AnimatedSprite2D
-@onready var boof_arm = $BoofArm
-@onready var floor_rays: Node = $FloorRays
+const LEVEL_POS_MAP: Dictionary = {
+	"Level1_base": Vector2(-213,-126),
+	"Level1_cp": Vector2(0,0),
+	"Level2_base": Vector2(-213,-126),
+	"Level2_cp": Vector2(0,0)
+}
 var animated_sprite_arm
 var muzzle_location
 var muzzle_node
 var trigger_pulled = true
 var facing_dir = 1
 var heal_cooldown = 0.5
+
+
+@onready var animated_sprite_player = $AnimatedSprite2D
+@onready var boof_arm = $BoofArm
+@onready var floor_rays: Node = $FloorRays
 @onready var down_ray: RayCast2D = $DownRay
 @onready var down_ray_2: RayCast2D = $DownRay2
 
@@ -23,6 +31,7 @@ func load_resources():
 
 func _ready():
 	load_resources()
+	set_level_pos()
 	gravity_scale = GameManager.get_gravity_scale()
 	GameManager.set_boofbro(self)
 
@@ -31,6 +40,17 @@ func _process(delta: float) -> void:
 		heal_cooldown -= delta
 	if GameManager.player_info_live.health < 0:
 		set_collision_mask_value(1,false)
+
+func set_level_pos():
+	var cp_reached = GameManager.checkpoint_reached
+	var level_num = get_tree().current_scene.name
+	var pos_key
+	if cp_reached:
+		pos_key = level_num + '_cp'
+	else:
+		pos_key = level_num + "_base"
+	position = LEVEL_POS_MAP[pos_key]
+	
 
 func _physics_process(delta):
 	# Handle jump.

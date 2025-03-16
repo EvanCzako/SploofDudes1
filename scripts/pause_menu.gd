@@ -48,6 +48,7 @@ func _on_level_button_pressed() -> void:
 func _on_restart_button_pressed() -> void:
 	if get_tree().paused:
 		GameManager.reset_inits()
+		GameManager.checkpoint_reached = false
 		resume()
 		get_tree().reload_current_scene()
 	
