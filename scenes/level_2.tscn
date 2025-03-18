@@ -261,6 +261,7 @@ sign_text = "Idk... that one guy is pretty jacked, fam. TRT much?"
 
 [node name="Sign3" parent="." instance=ExtResource("15_e6gfs")]
 position = Vector2(1438, -606)
+sign_text = "Nice job! To be continued!"
 
 [node name="Sign4" parent="." instance=ExtResource("15_e6gfs")]
 position = Vector2(-4, -77)
@@ -316,10 +317,10 @@ autoplay = "ElevatorMove"
 position = Vector2(934, -527)
 
 [node name="HealthUp" parent="." instance=ExtResource("20_wr05m")]
-position = Vector2(1162, -122)
+position = Vector2(1322, -301)
 
 [node name="Checkpoint" parent="." instance=ExtResource("22_efh7q")]
-position = Vector2(1281, -308)
+position = Vector2(1269, -302)
 
 [node name="ReadableArea" parent="." instance=ExtResource("10_byglb")]
 position = Vector2(1308, -112)

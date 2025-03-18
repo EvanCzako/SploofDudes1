@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var back_button: Button = $PanelContainer/VBoxContainer/BackButton
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var active = false
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +15,8 @@ func _process(delta: float) -> void:
 		animation_player.play("blur")
 	elif (GameManager.menu_info["active_menu"] != "MENU_LEVEL") and active:
 		active = false
+	if Input.is_action_just_pressed("Pause") and active:
+		back_button.emit_signal("pressed")
 
 
 func _on_back_button_pressed() -> void:
