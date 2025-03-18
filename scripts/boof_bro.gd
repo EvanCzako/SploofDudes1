@@ -7,7 +7,8 @@ const JUMP_IMPULSE = 400.0
 const LEVEL_POS_MAP: Dictionary = {
 	"Level1_base": Vector2(-213,-126),
 	"Level1_cp": Vector2(0,0),
-	"Level2_base": Vector2(-213,-126),
+	"Level2_base": Vector2(-350,-120),
+	#"Level2_base": Vector2(1400,-470),
 	"Level2_cp": Vector2(1280,-308)
 }
 var animated_sprite_arm

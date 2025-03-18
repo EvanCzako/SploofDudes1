@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb1416hqfy7o0"]
+
+[ext_resource type="Script" path="res://scripts/readable_area.gd" id="1_8vkl1"]
+[ext_resource type="FontFile" uid="uid://b170i2xq8cplh" path="res://assets/fonts/PixelOperator8.ttf" id="3_6nx0u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yyv2t"]
+radius = 46.0
+
+[node name="ReadableArea" type="Area2D"]
+z_index = 5
+position = Vector2(0, -16)
+collision_layer = 0
+script = ExtResource("1_8vkl1")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="HintArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HintArea"]
+position = Vector2(0, -14)
+shape = SubResource("CircleShape2D_yyv2t")
+
+[node name="HintLabel" type="RichTextLabel" parent="."]
+visible = false
+z_index = 10
+offset_left = -29.0
+offset_top = -15.0
+offset_right = 34.0
+offset_bottom = -2.0
+theme_override_fonts/normal_font = ExtResource("3_6nx0u")
+theme_override_font_sizes/normal_font_size = 8
+text = "(Press A)"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(0.278845, 0.469747, 0.791412, 0.509804)
+offset_left = 409.0
+offset_top = 145.0
+offset_right = 895.0
+offset_bottom = 444.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 25
+text = "Ayo, WASD for movement, arrows for aiming, space to shoot!"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="HintArea" to="." method="_on_hint_area_body_entered"]
+[connection signal="body_exited" from="HintArea" to="." method="_on_hint_area_body_exited"]

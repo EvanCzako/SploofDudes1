@@ -38,9 +38,8 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_skt1g"]
-radius = 9.02721
-height = 20.832
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdnqq"]
+size = Vector2(20, 20.416)
 
 [node name="BoofBro" type="RigidBody2D"]
 z_index = 5
@@ -82,8 +81,8 @@ collide_with_areas = true
 [node name="FloorRays" type="Node" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.90735e-06, -15)
+position = Vector2(1.90735e-06, -14.7004)
 scale = Vector2(0.429414, 1.44009)
-shape = SubResource("CapsuleShape2D_skt1g")
+shape = SubResource("RectangleShape2D_fdnqq")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

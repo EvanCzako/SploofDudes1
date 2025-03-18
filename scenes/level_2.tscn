@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b3e7qews5y0ic"]
+[gd_scene load_steps=31 format=3 uid="uid://b3e7qews5y0ic"]
 
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_7kt26"]
 [ext_resource type="Script" path="res://scripts/level_2.gd" id="1_mcfg4"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dn27ivcij06a2" path="res://scenes/elevator_1.tscn" id="9_3hena"]
 [ext_resource type="Texture2D" uid="uid://tiy0w5eu88c5" path="res://assets/sprites/SunsetLayer1/sunset_again0.png" id="10_8a1k8"]
 [ext_resource type="PackedScene" uid="uid://b6iax4g0xw2qm" path="res://scenes/big_guy_1.tscn" id="10_ab0pc"]
+[ext_resource type="PackedScene" uid="uid://bb1416hqfy7o0" path="res://scenes/readable_area.tscn" id="10_byglb"]
 [ext_resource type="Texture2D" uid="uid://c5ph80vrxi5kr" path="res://assets/sprites/MapChunks/Layer 2_sprite_1.png" id="10_jjovq"]
 [ext_resource type="PackedScene" uid="uid://uy3pnhocmtcb" path="res://scenes/menus.tscn" id="12_vpjt3"]
 [ext_resource type="PackedScene" uid="uid://dn5l3jct4wyjs" path="res://scenes/sign_1.tscn" id="15_e6gfs"]
@@ -172,10 +173,10 @@ collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2" groups=["MapCollision"]]
 position = Vector2(-745, 39)
-polygon = PackedVector2Array(250, 230, 250, -761, 374, -768, 375, -134, 416, -134, 465, -100, 1932, -100, 2117.77, -100, 2217, -100, 2217, -177, 2169, -177, 2169, -294, 2172.96, -298, 2214, -298, 2214, -455, 2214, -596, 2047, -596, 1950, -547, 1860, -547, 1860, -576, 1911, -576, 2018, -628, 2215, -627, 2215, -714, 1938, -714, 1932, -720.23, 1932, -737, 2239, -737, 2239, -100, 2247, -100, 2245, 173, 954, 209)
+polygon = PackedVector2Array(250, 230, 250, -761, 374, -768, 375, -134, 416, -134, 465, -100, 2217, -100, 2217, -177, 2169, -177, 2169, -294, 2172.96, -298, 2214, -298, 2214, -596, 2047, -596, 1950, -547, 1860, -547, 1860, -576, 1911, -576, 2018, -628, 2215, -627, 2215, -714, 1938, -714, 1932, -720.23, 1932, -737, 2239, -737, 2239, -100, 2247, -100, 2245, 173, 954, 209)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2"]
-polygon = PackedVector2Array(898, -588, 903, -583, 903, -527, 1012, -527, 1012, -511, 1030, -511, 1030, -473, 1078, -473, 1078, -454, 1105, -454, 1119, -445, 1335, -445, 1335, -487, 1340, -492, 1361, -492, 1366, -486, 1366, -446, 1419, -446, 1419, -414, 1335, -414, 1230, -414, 1230, -259, 1353, -259, 1356, -256, 1356, -143, 1352, -139, 1196, -139, 1196, -135, 1187, -135, 1187, -413, 960, -413, 960, -443, 806, -443, 806, -588)
+polygon = PackedVector2Array(903, -588, 903, -527, 1012, -527, 1012, -511, 1030, -511, 1030, -473, 1078, -473, 1078, -454, 1105, -454, 1119, -445, 1335, -445, 1335, -492, 1366, -492, 1366, -446, 1419, -446, 1419, -414, 1335, -414, 1230, -414, 1230, -259, 1353, -259, 1356, -256, 1356, -143, 1352, -139, 1196, -139, 1196, -135, 1187, -135, 1187, -413, 960, -413, 960, -443, 806, -443, 806, -588)
 
 [node name="Sprite2D" type="Sprite2D" parent="MapCollisionMasks/Area2D2"]
 position = Vector2(502, -230)
@@ -202,6 +203,18 @@ position = Vector2(1266, -465)
 
 [node name="Ninja5" parent="Ninjas" instance=ExtResource("8_qw1ax")]
 position = Vector2(1186, -465)
+
+[node name="Ninja6" parent="Ninjas" instance=ExtResource("8_qw1ax")]
+position = Vector2(968, -85)
+
+[node name="BigGuys" type="Node" parent="."]
+
+[node name="BigGuy1" parent="BigGuys" instance=ExtResource("10_ab0pc")]
+position = Vector2(987, -94)
+
+[node name="Crate1" parent="BigGuys" instance=ExtResource("8_6vrfv")]
+position = Vector2(837, -94)
+rotation = 1.5708
 
 [node name="ParallaxLayers" type="Node" parent="."]
 
@@ -239,28 +252,19 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_io8ms")
 
 [node name="Sign1" parent="." instance=ExtResource("15_e6gfs")]
-position = Vector2(-328, -113)
-sign_text = "420 Boof Dr"
+position = Vector2(-271, -77)
+sign_text = "Whaddup soulja! Welcome back to the front. Left stick to move, right stick to aim, right triggy to shoot! Press B to jump and A to interact. (A to close)"
 
 [node name="Sign2" parent="." instance=ExtResource("15_e6gfs")]
 position = Vector2(814, -77)
-sign_text = "Idk... those guys are pretty jacked, fam."
+sign_text = "Idk... that one guy is pretty jacked, fam. TRT much?"
 
 [node name="Sign3" parent="." instance=ExtResource("15_e6gfs")]
 position = Vector2(1438, -606)
-sign_text = "Nice! Let's say this is the end of the level."
 
-[node name="BigGuys" type="Node" parent="."]
-
-[node name="BigGuy1" parent="BigGuys" instance=ExtResource("10_ab0pc")]
-position = Vector2(987, -94)
-
-[node name="BigGuy2" parent="BigGuys" instance=ExtResource("10_ab0pc")]
-position = Vector2(975, -100)
-
-[node name="Crate1" parent="BigGuys" instance=ExtResource("8_6vrfv")]
-position = Vector2(837, -94)
-rotation = 1.5708
+[node name="Sign4" parent="." instance=ExtResource("15_e6gfs")]
+position = Vector2(-4, -77)
+sign_text = "Crud! Those are ganja guards up ahead. Don't forget, you can do extra damage by jumping on their heads!!"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -284,7 +288,7 @@ position = Vector2(1148, -161)
 
 [node name="BoofBro" parent="." groups=["Player"] instance=ExtResource("2_qttdx")]
 unique_name_in_owner = true
-position = Vector2(-213, -126)
+position = Vector2(-351, -110)
 
 [node name="Elevators" type="Node" parent="."]
 
@@ -316,6 +320,9 @@ position = Vector2(1162, -122)
 
 [node name="Checkpoint" parent="." instance=ExtResource("22_efh7q")]
 position = Vector2(1281, -308)
+
+[node name="ReadableArea" parent="." instance=ExtResource("10_byglb")]
+position = Vector2(1308, -112)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]
