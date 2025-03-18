@@ -8,7 +8,7 @@ const LEVEL_POS_MAP: Dictionary = {
 	"Level1_base": Vector2(-213,-126),
 	"Level1_cp": Vector2(0,0),
 	"Level2_base": Vector2(-213,-126),
-	"Level2_cp": Vector2(0,0)
+	"Level2_cp": Vector2(1280,-308)
 }
 var animated_sprite_arm
 var muzzle_location
@@ -17,12 +17,13 @@ var trigger_pulled = true
 var facing_dir = 1
 var heal_cooldown = 0.5
 
-
+@onready var camera_2d: Camera2D = $Camera2D
 @onready var animated_sprite_player = $AnimatedSprite2D
 @onready var boof_arm = $BoofArm
 @onready var floor_rays: Node = $FloorRays
 @onready var down_ray: RayCast2D = $DownRay
 @onready var down_ray_2: RayCast2D = $DownRay2
+@onready var cam_snap_cooldown: float = 0.1
 
 func load_resources():
 	animated_sprite_arm = boof_arm.get_node("AnimatedSprite2D")
@@ -31,11 +32,16 @@ func load_resources():
 
 func _ready():
 	load_resources()
+	camera_2d.position_smoothing_enabled = false
 	set_level_pos()
 	gravity_scale = GameManager.get_gravity_scale()
 	GameManager.set_boofbro(self)
 
 func _process(delta: float) -> void:
+	if cam_snap_cooldown >= 0:
+		cam_snap_cooldown -= delta
+	else:
+		camera_2d.position_smoothing_enabled = true
 	if heal_cooldown >= 0:
 		heal_cooldown -= delta
 	if GameManager.player_info_live.health < 0:

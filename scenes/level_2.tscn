@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b3e7qews5y0ic"]
+[gd_scene load_steps=30 format=3 uid="uid://b3e7qews5y0ic"]
 
 [ext_resource type="PackedScene" uid="uid://ciru0suekrdkh" path="res://scenes/hud.tscn" id="1_7kt26"]
 [ext_resource type="Script" path="res://scripts/level_2.gd" id="1_mcfg4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://uqeb6qx83m2n" path="res://assets/sprites/MapChunks/l0_sprite_1.png" id="5_uvqpr"]
 [ext_resource type="Script" path="res://scripts/killzone.gd" id="6_avyox"]
 [ext_resource type="PackedScene" uid="uid://b2ej8p8vbv4fa" path="res://scenes/RecycleBin/recycle_bin.tscn" id="7_rblei"]
+[ext_resource type="Texture2D" uid="uid://ckpik4us1ep8e" path="res://assets/sprites/Env/TransMirror1.png" id="7_sevru"]
 [ext_resource type="PackedScene" uid="uid://56fv7m8t5dvg" path="res://scenes/crate_1.tscn" id="8_6vrfv"]
 [ext_resource type="PackedScene" uid="uid://b3575872h55bb" path="res://scenes/ninja_1.tscn" id="8_qw1ax"]
 [ext_resource type="PackedScene" uid="uid://dn27ivcij06a2" path="res://scenes/elevator_1.tscn" id="9_3hena"]
@@ -20,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://7dff4xtqswft" path="res://scenes/street_lamp_flicker.tscn" id="17_naka5"]
 [ext_resource type="PackedScene" uid="uid://bdcu77upcisqw" path="res://scenes/street_lamp_no_flicker.tscn" id="18_j86w6"]
 [ext_resource type="PackedScene" uid="uid://cwby6fgpkrel6" path="res://scenes/PowerUps/health_up.tscn" id="20_wr05m"]
+[ext_resource type="PackedScene" uid="uid://c7lpuqo0q50qj" path="res://scenes/PowerUps/checkpoint.tscn" id="22_efh7q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c70t"]
 size = Vector2(4559, 84)
@@ -158,8 +160,14 @@ position = Vector2(1131, -447)
 
 [node name="MapCollisionMasks" type="Node" parent="." groups=["MapCollision"]]
 
+[node name="TransMirror1" type="Sprite2D" parent="MapCollisionMasks"]
+modulate = Color(1, 1, 1, 0.458824)
+z_index = -5
+position = Vector2(1352, -316)
+texture = ExtResource("7_sevru")
+
 [node name="Area2D2" type="StaticBody2D" parent="MapCollisionMasks" groups=["MapCollision"]]
-collision_layer = 255
+collision_layer = 251
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapCollisionMasks/Area2D2" groups=["MapCollision"]]
@@ -305,6 +313,9 @@ position = Vector2(934, -527)
 
 [node name="HealthUp" parent="." instance=ExtResource("20_wr05m")]
 position = Vector2(1162, -122)
+
+[node name="Checkpoint" parent="." instance=ExtResource("22_efh7q")]
+position = Vector2(1281, -308)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer" to="Killzone" method="_on_timer_timeout"]
